@@ -8,6 +8,9 @@ import 'package:awafi_pos/order_details/order_details_widget.dart';
 import 'package:awafi_pos/view_invoice/view_invoice.dart';
 import 'package:intl/intl.dart';
 
+import '../DailyReport/genaratePDF/expensePdf.dart';
+import '../DailyReport/genaratePDF/expenseReportModel.dart';
+import '../DailyReport/genaratePDF/pdf_api.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -46,41 +49,70 @@ class _ExpenseReportState extends State<ExpenseReport> {
     selectedFromDate =DateTime(today.year,today.month,today.day,0,0,0);
   }
   getInvoiceByNo() async {
-    invoices=await FirebaseFirestore.instance.collection('expenses')
-    .doc(currentBranchId)
-    .collection('expenses')
-        .where('invoiceNo',isEqualTo: invoiceController.text).get();
-    setState(() {
-
-    });
+    invoices = await FirebaseFirestore.instance
+        .collection('expenses')
+        .doc(currentBranchId)
+        .collection('expenses')
+        .where('invoiceNo', isEqualTo: invoiceController.text)
+        .get();
+    setState(() {});
   }
+
+  List invoiceList = [];
   getInvoiceByDate() async {
-    if(fromDate!=null && toDate!=null) {
-      Timestamp fromDateTimeStamp =Timestamp.fromDate(selectedFromDate);
+    if (fromDate != null && toDate != null) {
+      Timestamp fromDateTimeStamp = Timestamp.fromDate(selectedFromDate);
       // Timestamp toDateTimeStamp =Timestamp.fromDate(DateTime(toDate.year, toDate.month, toDate.day));
-      Timestamp toDateTimeStamp =Timestamp.fromDate(selectedOutDate);
-      invoices = await FirebaseFirestore.instance.collection('expenses')
+      Timestamp toDateTimeStamp = Timestamp.fromDate(selectedOutDate);
+      FirebaseFirestore.instance
+          .collection('expenses')
           .doc(currentBranchId)
           .collection('expenses')
           .where('salesDate', isGreaterThanOrEqualTo: fromDateTimeStamp)
           .where('salesDate', isLessThan: toDateTimeStamp)
-          .get();
-      setState(() {
-
+          .get()
+          .then((value) {
+        invoices = value;
+        for (var item in value.docs) {
+          invoiceList.add({
+            'staff': PosUserIdToName[item['currentUserId']],
+            'amount': item['amount'],
+            'invoiceNo': item['invoiceNo'],
+            'description': item['description'],
+            'voucherNo': item['voucherNo'],
+          });
+          setState(() {});
+        }
       });
     }
   }
+
   getDailyInvoice() async {
     var now = DateTime.now();
-    var lastMidnight =Timestamp.fromDate(DateTime(now.year, now.month, now.day));
+    var lastMidnight =
+    Timestamp.fromDate(DateTime(now.year, now.month, now.day));
 
-    invoices=await FirebaseFirestore.instance.collection('expenses')
+    FirebaseFirestore.instance
+        .collection('expenses')
         .doc(currentBranchId)
         .collection('expenses')
-        .where('salesDate',isGreaterThanOrEqualTo: lastMidnight).get();
-    setState(() {
-
+        .where('salesDate', isGreaterThanOrEqualTo: lastMidnight)
+        .get()
+        .then((value) {
+      invoices = value;
+      for (var item in value.docs) {
+        print(123);
+        invoiceList.add({
+          'staff': PosUserIdToName[item['currentUserId']],
+          'amount': item['amount'],
+          'invoiceNo': item['invoiceNo'],
+          'description': item['description'],
+          'voucherNo': item['voucherNo'],
+        });
+        setState(() {});
+      }
     });
+    setState(() {});
   }
 
   // Future<void> testReceipt(NetworkPrinter printer) async {
@@ -211,7 +243,59 @@ class _ExpenseReportState extends State<ExpenseReport> {
               fontFamily: 'Poppins',color: Colors.white
           ),
         ),
-        actions: [],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: InkWell(
+              onTap: () async {
+                try {
+                  final invoice = ExpenseReportData(
+                    InvoiceList: invoiceList,
+                    From: fromDate,
+                    To: toDate,
+                  );
+
+                  final pdfFile = await ExpensePdfPage.generate(invoice);
+                  await PdfApi.openFile(pdfFile);
+                } catch (e) {
+                  print(e);
+                  return showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('error'),
+                          content: Text(e.toString()),
+                          actions: <Widget>[
+                            TextButton(
+                              child: new Text('ok'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            )
+                          ],
+                        );
+                      });
+                }
+              },
+              child: Container(
+                height: 30,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: Colors.white, width: 2)),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10.0, right: 10),
+                    child: Text(
+                      "Download pdf",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
         centerTitle: true,
         elevation: 0,
       ),
@@ -219,244 +303,247 @@ class _ExpenseReportState extends State<ExpenseReport> {
         child: Column(
           children: [
 
-            Row(
-              children: [
-                Container(
-                  width: 200,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(3),
-                      color: Colors.white),
-                  child: Center(
-                    child: TextFormField(
-                      controller: invoiceController,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        labelText: 'Bill No',
-                        hoverColor: Colors.red,
-                        hintText: 'search bill no',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.pink.shade900, width: 1.0),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  Container(
+                    width: 200,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                        color: Colors.white),
+                    child: Center(
+                      child: TextFormField(
+                        controller: invoiceController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          labelText: 'Bill No',
+                          hoverColor: Colors.red,
+                          hintText: 'search bill no',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.pink.shade900, width: 1.0),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 20,),
-                TextButton(
-                  onPressed: (){
-                    FocusScope.of(context).unfocus();
-                    getInvoiceByNo();
+                  const SizedBox(width: 20,),
+                  TextButton(
+                    onPressed: (){
+                      FocusScope.of(context).unfocus();
+                      getInvoiceByNo();
 
-                  },
-                  child: const Text('Search By invoiceNo'),
-                ),
-                // const SizedBox(width: 50,),
-                // InkWell(
-                //   onTap: () async {
-                //     final DateTime picked = await showDatePicker(
-                //         context: context,
-                //         initialDate: fromDate??DateTime.now(),
-                //         firstDate: DateTime(2015, 8),
-                //         lastDate: DateTime(2101));
-                //     if (picked != null && picked != fromDate) {
-                //       setState(() {
-                //         fromDate = picked;
-                //       });
-                //     }
-                //   },
-                //   child:Container(
-                //     width: 200,
-                //     decoration: BoxDecoration(
-                //         borderRadius: BorderRadius.circular(3),
-                //         color: Colors.white),
-                //     child: Center(
-                //       child: Text(
-                //           fromDate==null?'Date From':fromDate.toLocal().toString().substring(0,10)
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(width: 20,),
-                // InkWell(
-                //   onTap: () async {
-                //     final DateTime picked = await showDatePicker(
-                //         context: context,
-                //         initialDate: toDate??DateTime.now(),
-                //         firstDate: DateTime(2015, 8),
-                //         lastDate: DateTime(2101));
-                //     if (picked != null && picked != toDate) {
-                //       setState(() {
-                //         toDate = picked;
-                //       });
-                //     }
-                //   },
-                //   child:Container(
-                //     width: 200,
-                //     decoration: BoxDecoration(
-                //         borderRadius: BorderRadius.circular(3),
-                //         color: Colors.white),
-                //     child: Center(
-                //       child: Text(
-                //           toDate==null?'To Date ':toDate.toLocal().toString().substring(0,10)
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(width: 20,),
-                const SizedBox(width: 50,),
-                Container(
-                  height: 50,
-                  width: 220,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.white,
-                          width: 1),
-                      borderRadius:
-                      BorderRadius.circular(
-                          10)),
-                  child: DateTimeField(
-                    initialValue:selectedFromDate ,
-                    format: format,
-                    onShowPicker: (context,
-                        currentValue) async {
-                      final date =
-                      await showDatePicker(
-                          context: context,
-                          firstDate:
-                          DateTime(1900),
-                          initialDate:
-                          currentValue ??
-                              DateTime
-                                  .now(),
-                          lastDate:
-                          DateTime(2100));
-                      if (date != null) {
-                        final time =
-                        await showTimePicker(
-                          context: context,
-                          initialTime: TimeOfDay
-                              .fromDateTime(
-                              currentValue ??
-                                  DateTime
-                                      .now()),
-                        );
-                        selectedFromDate =
-                            DateTime(
-                                date.year,
-                                date.month,
-                                date.day,
-                                time.hour,
-                                time.minute);
-                        // datePicked1=Timestamp.fromDate(selectedFromDate);
-                        return DateTimeField
-                            .combine(date, time);
-                      } else {
-                        return currentValue;
-                      }
                     },
+                    child: const Text('Search By invoiceNo'),
                   ),
-                ),
-                const SizedBox(width: 50,),
-                Text(
-                  'To',
-                  style: FlutterFlowTheme.bodyText1.override(
-                      fontFamily: 'Poppins',fontWeight: FontWeight.bold
+                  // const SizedBox(width: 50,),
+                  // InkWell(
+                  //   onTap: () async {
+                  //     final DateTime picked = await showDatePicker(
+                  //         context: context,
+                  //         initialDate: fromDate??DateTime.now(),
+                  //         firstDate: DateTime(2015, 8),
+                  //         lastDate: DateTime(2101));
+                  //     if (picked != null && picked != fromDate) {
+                  //       setState(() {
+                  //         fromDate = picked;
+                  //       });
+                  //     }
+                  //   },
+                  //   child:Container(
+                  //     width: 200,
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(3),
+                  //         color: Colors.white),
+                  //     child: Center(
+                  //       child: Text(
+                  //           fromDate==null?'Date From':fromDate.toLocal().toString().substring(0,10)
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // const SizedBox(width: 20,),
+                  // InkWell(
+                  //   onTap: () async {
+                  //     final DateTime picked = await showDatePicker(
+                  //         context: context,
+                  //         initialDate: toDate??DateTime.now(),
+                  //         firstDate: DateTime(2015, 8),
+                  //         lastDate: DateTime(2101));
+                  //     if (picked != null && picked != toDate) {
+                  //       setState(() {
+                  //         toDate = picked;
+                  //       });
+                  //     }
+                  //   },
+                  //   child:Container(
+                  //     width: 200,
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(3),
+                  //         color: Colors.white),
+                  //     child: Center(
+                  //       child: Text(
+                  //           toDate==null?'To Date ':toDate.toLocal().toString().substring(0,10)
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // const SizedBox(width: 20,),
+                  const SizedBox(width: 50,),
+                  Container(
+                    height: 50,
+                    width: 220,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Colors.white,
+                            width: 1),
+                        borderRadius:
+                        BorderRadius.circular(
+                            10)),
+                    child: DateTimeField(
+                      initialValue:selectedFromDate ,
+                      format: format,
+                      onShowPicker: (context,
+                          currentValue) async {
+                        final date =
+                        await showDatePicker(
+                            context: context,
+                            firstDate:
+                            DateTime(1900),
+                            initialDate:
+                            currentValue ??
+                                DateTime
+                                    .now(),
+                            lastDate:
+                            DateTime(2100));
+                        if (date != null) {
+                          final time =
+                          await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay
+                                .fromDateTime(
+                                currentValue ??
+                                    DateTime
+                                        .now()),
+                          );
+                          selectedFromDate =
+                              DateTime(
+                                  date.year,
+                                  date.month,
+                                  date.day,
+                                  time.hour,
+                                  time.minute);
+                          // datePicked1=Timestamp.fromDate(selectedFromDate);
+                          return DateTimeField
+                              .combine(date, time);
+                        } else {
+                          return currentValue;
+                        }
+                      },
+                    ),
                   ),
-                ),
-                const SizedBox(width: 50,),
-                Container(
-                  height: 50,
-                  width: 220,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.white,
-                          width: 1),
-                      borderRadius:
-                      BorderRadius.circular(
-                          10)),
-                  child: DateTimeField(
-                    initialValue:selectedOutDate ,
-                    format: format,
-                    onShowPicker: (context,
-                        currentValue) async {
-                      final date =
-                      await showDatePicker(
-                          context: context,
-                          firstDate:
-                          DateTime(1900),
-                          initialDate:
-                          currentValue ??
-                              DateTime
-                                  .now(),
-                          lastDate:
-                          DateTime(2100));
-                      if (date != null) {
-                        final time =
-                        await showTimePicker(
-                          context: context,
-                          initialTime: TimeOfDay
-                              .fromDateTime(
-                              currentValue ??
-                                  DateTime
-                                      .now()),
-                        );
-                        selectedOutDate =
-                            DateTime(
-                                date.year,
-                                date.month,
-                                date.day,
-                                time.hour,
-                                time.minute);
-                        // datePicked2=Timestamp.fromDate(selectedOutDate) ;
-                        return DateTimeField
-                            .combine(date, time);
-                      } else {
-                        return currentValue;
-                      }
+                  const SizedBox(width: 50,),
+                  Text(
+                    'To',
+                    style: FlutterFlowTheme.bodyText1.override(
+                        fontFamily: 'Poppins',fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  const SizedBox(width: 50,),
+                  Container(
+                    height: 50,
+                    width: 220,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Colors.white,
+                            width: 1),
+                        borderRadius:
+                        BorderRadius.circular(
+                            10)),
+                    child: DateTimeField(
+                      initialValue:selectedOutDate ,
+                      format: format,
+                      onShowPicker: (context,
+                          currentValue) async {
+                        final date =
+                        await showDatePicker(
+                            context: context,
+                            firstDate:
+                            DateTime(1900),
+                            initialDate:
+                            currentValue ??
+                                DateTime
+                                    .now(),
+                            lastDate:
+                            DateTime(2100));
+                        if (date != null) {
+                          final time =
+                          await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay
+                                .fromDateTime(
+                                currentValue ??
+                                    DateTime
+                                        .now()),
+                          );
+                          selectedOutDate =
+                              DateTime(
+                                  date.year,
+                                  date.month,
+                                  date.day,
+                                  time.hour,
+                                  time.minute);
+                          // datePicked2=Timestamp.fromDate(selectedOutDate) ;
+                          return DateTimeField
+                              .combine(date, time);
+                        } else {
+                          return currentValue;
+                        }
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 50,),
+                  TextButton(
+                    onPressed: (){
+                      getInvoiceByDate();
                     },
+                    child: const Text('Search By Date'),
                   ),
-                ),
-                const SizedBox(width: 50,),
-                TextButton(
-                  onPressed: (){
-                    getInvoiceByDate();
-                  },
-                  child: const Text('Search By Date'),
-                ),
-                // InkWell
-                //   (
-                //     onTap: () async {
-                //       // checkPortRange('192.168.1', 9100, 9110);
-                //       // return;
-                //       const PaperSize paper = PaperSize.mm80;
-                //       final profile = await CapabilityProfile.load();
-                //       final printer = NetworkPrinter(paper, profile);
-                //
-                //      print('1.                $printer');
-                //
-                //       try{
-                //         // await printer.connect('192.168.123.100', port: 9100);
-                //         final PosPrintResult res = await printer.connect('192.168.1.222', port: 9100,timeout: const Duration(seconds: 10));
-                //       print('0.                ${res.value}');
-                //       print(res.msg);
-                //       if (res == PosPrintResult.success) {
-                //         print('SUUUUUUUUU');
-                //         testReceipt(printer);
-                //       }else
-                //       {
-                //         print("no printer found");
-                //       }
-                //       }catch(e){
-                //         print("button catch");
-                //         print(e.toString());
-                //       }
-                //     },
-                //     child: const Text('Eprint test',style: TextStyle(color: Colors.red),)),
-              ],
+                  // InkWell
+                  //   (
+                  //     onTap: () async {
+                  //       // checkPortRange('192.168.1', 9100, 9110);
+                  //       // return;
+                  //       const PaperSize paper = PaperSize.mm80;
+                  //       final profile = await CapabilityProfile.load();
+                  //       final printer = NetworkPrinter(paper, profile);
+                  //
+                  //      print('1.                $printer');
+                  //
+                  //       try{
+                  //         // await printer.connect('192.168.123.100', port: 9100);
+                  //         final PosPrintResult res = await printer.connect('192.168.1.222', port: 9100,timeout: const Duration(seconds: 10));
+                  //       print('0.                ${res.value}');
+                  //       print(res.msg);
+                  //       if (res == PosPrintResult.success) {
+                  //         print('SUUUUUUUUU');
+                  //         testReceipt(printer);
+                  //       }else
+                  //       {
+                  //         print("no printer found");
+                  //       }
+                  //       }catch(e){
+                  //         print("button catch");
+                  //         print(e.toString());
+                  //       }
+                  //     },
+                  //     child: const Text('Eprint test',style: TextStyle(color: Colors.red),)),
+                ],
 
+              ),
             ),
 
             Expanded(
