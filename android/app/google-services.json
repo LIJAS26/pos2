@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1019051552110",
+    "project_id": "boofiya-faraula",
+    "storage_bucket": "boofiya-faraula.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019051552110:android:793ed7257a393ca3dc657f",
+        "android_client_info": {
+          "package_name": "com.firstlogicmetalab.boofiya_faraula_pos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019051552110-va6j0bjjikas23de4gusaig70ttn45ss.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmSEPmM4cB3Zk_5q7B8398jvthG6NGBVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019051552110-va6j0bjjikas23de4gusaig70ttn45ss.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
