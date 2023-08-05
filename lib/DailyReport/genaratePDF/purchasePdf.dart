@@ -13,8 +13,6 @@ import 'package:universal_html/html.dart' as html;
 import '../../modals/Print/pdf_api.dart';
 var image;
 
-
-
 var format = NumberFormat.simpleCurrency(locale: 'en_in');
 
 class PurchasePdfPage {
@@ -62,14 +60,13 @@ class PurchasePdfPage {
                             children: [
                               pw.Container(width: 70,child: pw.Text('Shop Name',style: pw.TextStyle(fontSize: 11,fontWeight: FontWeight.bold)),),
                               pw.Container(width: 170,child: pw.Text(':  Boofiya Faraula',style: pw.TextStyle(fontSize: 11,fontWeight: FontWeight.bold)),),
-
                             ]
                         ),
                         pw.SizedBox(height: 5),
                         pw.Row(
                             children: [
                               pw.Container(width: 70,child: pw.Text('Vat Number',style: pw.TextStyle(fontSize: 11,fontWeight: FontWeight.bold)),),
-                              pw.Container(width: 170,child: pw.Text('310963595400003: ',style: pw.TextStyle(fontSize: 11,fontWeight: FontWeight.bold)),),
+                              pw.Container(width: 170,child: pw.Text(' : 310963595400003 ',style: pw.TextStyle(fontSize: 11,fontWeight: FontWeight.bold)),),
                             ]
                         ),
                         pw.SizedBox(height: 5),
@@ -120,7 +117,7 @@ class PurchasePdfPage {
                   print(item.toString()+'                    $index');
                   return [
                     item['voucherNo'],
-                    item['date'].toDate().toString().substring(0,10),
+                    item['salesDate'].toDate().toString().substring(0,10),
                     item['invoiceNo'],
                     item['amount'],
                     item['description'],
@@ -194,7 +191,7 @@ class PurchasePdfPage {
     // print('bbbbbbbbbbbbbbbbbbbbbbbb');
 
     //android
-    return PdfApi.saveDocument(name: 'Purchase Wise Report.pdf', pdf: pdf);
+    return PdfApi.saveDocument(name: 'Purchase Report.pdf', pdf: pdf);
     // return PdfApi.saveDocument(name: '${invoice.from.toDate().toString().substring(0,10)} - ${invoice.from.toDate().toString().substring(0,10)}.pdf', pdf: pdf);
   }
 

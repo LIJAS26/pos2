@@ -48,38 +48,24 @@ class _ExpenseReportState extends State<ExpenseReport> {
     DateTime today=DateTime.now();
     selectedFromDate =DateTime(today.year,today.month,today.day,0,0,0);
   }
-
   getInvoiceByNo() async {
-    FirebaseFirestore.instance
+    invoices = await FirebaseFirestore.instance
         .collection('expenses')
         .doc(currentBranchId)
         .collection('expenses')
         .where('invoiceNo', isEqualTo: invoiceController.text)
-        .get()
-        .then((value) {
-      invoices = value;
-      invoiceList=[];
-      for (var item in value.docs) {
-        print(123);
-        invoiceList.add({
-          'staff': PosUserIdToName[item['currentUserId']],
-          'amount': item['amount'],
-          'invoiceNo': item['invoiceNo'],
-          'description': item['description'],
-          'voucherNo': item['voucherNo'],
-          'date': item['salesDate'],
-        });
-        setState(() {});
-      }
-    });
+        .get();
     setState(() {});
   }
 
   List invoiceList = [];
   getInvoiceByDate() async {
     if (fromDate != null && toDate != null) {
+      print(fromDate);
+      print(toDate);
+      print(selectedFromDate);
+      print(selectedOutDate);
       Timestamp fromDateTimeStamp = Timestamp.fromDate(selectedFromDate);
-      // Timestamp toDateTimeStamp =Timestamp.fromDate(DateTime(toDate.year, toDate.month, toDate.day));
       Timestamp toDateTimeStamp = Timestamp.fromDate(selectedOutDate);
       FirebaseFirestore.instance
           .collection('expenses')
@@ -90,23 +76,15 @@ class _ExpenseReportState extends State<ExpenseReport> {
           .get()
           .then((value) {
         invoices = value;
-        invoiceList=[];
         for (var item in value.docs) {
-          DateTime salesDate = item['salesDate'].toDate(); // Convert Timestamp to DateTime
-          String formattedDate =
-          DateFormat('yyyy-MM-dd').format(salesDate);
           invoiceList.add({
             'staff': PosUserIdToName[item['currentUserId']],
             'amount': item['amount'],
             'invoiceNo': item['invoiceNo'],
             'description': item['description'],
             'voucherNo': item['voucherNo'],
-            'date': item['salesDate'],
-
           });
-          setState(() {
-            print("$invoiceList -------------------------------------");
-          });
+          setState(() {});
         }
       });
     }
@@ -125,7 +103,6 @@ class _ExpenseReportState extends State<ExpenseReport> {
         .get()
         .then((value) {
       invoices = value;
-      invoiceList=[];
       for (var item in value.docs) {
         print(123);
         invoiceList.add({
@@ -134,13 +111,14 @@ class _ExpenseReportState extends State<ExpenseReport> {
           'invoiceNo': item['invoiceNo'],
           'description': item['description'],
           'voucherNo': item['voucherNo'],
-          'date': item['salesDate'],
         });
         setState(() {});
       }
     });
     setState(() {});
   }
+
+
 
   void checkPortRange(String subnet, int fromPort, int toPort) {
     if (fromPort > toPort) {
