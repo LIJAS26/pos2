@@ -109,6 +109,7 @@ class _PurchaseReportState extends State<PurchaseReport> {
             'invoiceNo': item['invoiceNo'],
             'description': item['description'],
             'voucherNo': item['voucherNo'],
+            'salesDate':item['salesDate']
           });
           setState(() {});
         }
@@ -136,6 +137,7 @@ class _PurchaseReportState extends State<PurchaseReport> {
           'invoiceNo': item['invoiceNo'],
           'description': item['description'],
           'voucherNo': item['voucherNo'],
+          'salesDate':item['salesDate']
         });
         setState(() {});
       }

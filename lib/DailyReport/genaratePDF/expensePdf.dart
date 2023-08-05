@@ -104,6 +104,7 @@ class ExpensePdfPage {
                 context: context,
                 headers: [
                   'Voucher No',
+                  'Date',
                   'Invoice No',
                   'Amount',
                   'Description',
@@ -119,6 +120,7 @@ class ExpensePdfPage {
                   print(item.toString()+'                    $index');
                   return [
                     item['voucherNo'],
+                    item['salesDate'].toDate().toString().substring(0,10),
                     item['invoiceNo'],
                     item['amount'],
                     item['description'],
@@ -192,7 +194,7 @@ class ExpensePdfPage {
     // print('bbbbbbbbbbbbbbbbbbbbbbbb');
 
     //android
-    return PdfApi.saveDocument(name: 'Expense Wise Report.pdf', pdf: pdf);
+    return PdfApi.saveDocument(name: 'Expense Report.pdf', pdf: pdf);
     // return PdfApi.saveDocument(name: '${invoice.from.toDate().toString().substring(0,10)} - ${invoice.from.toDate().toString().substring(0,10)}.pdf', pdf: pdf);
   }
 
