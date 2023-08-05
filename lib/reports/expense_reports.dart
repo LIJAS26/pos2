@@ -61,8 +61,11 @@ class _ExpenseReportState extends State<ExpenseReport> {
   List invoiceList = [];
   getInvoiceByDate() async {
     if (fromDate != null && toDate != null) {
+      print(fromDate);
+      print(toDate);
+      print(selectedFromDate);
+      print(selectedOutDate);
       Timestamp fromDateTimeStamp = Timestamp.fromDate(selectedFromDate);
-      // Timestamp toDateTimeStamp =Timestamp.fromDate(DateTime(toDate.year, toDate.month, toDate.day));
       Timestamp toDateTimeStamp = Timestamp.fromDate(selectedOutDate);
       FirebaseFirestore.instance
           .collection('expenses')
@@ -115,101 +118,7 @@ class _ExpenseReportState extends State<ExpenseReport> {
     setState(() {});
   }
 
-  // Future<void> testReceipt(NetworkPrinter printer) async {
-  //   try {
-  //
-  //       printer.text('KOT SECTION TESTING');
-  //     // for (Map<String, dynamic> item in items) {
-  //     //   if(!categories.contains(item['category'])) {
-  //     //     categories.add(item['category']);
-  //     //   }
-  //     // }
-  //     // print(categories);
-  //     // for(var category in categories) {
-  //     //   print(category);
-  //     //   // printer.text('Token No : ' + token.toString(),
-  //     //   //     styles: const PosStyles(align: PosAlign.center,));
-  //     //   printer.text(
-  //     //       'Date : ' + DateTime.now().toString().substring(0, 16),
-  //     //       styles: const PosStyles(align: PosAlign.center,));
-  //     //   // printer.text('Invoice No : ' + invNo.toString(),
-  //     //   //     styles: const PosStyles(align: PosAlign.center,));
-  //     //   // kotBytes+=generator.text('.............................................',styles: const PosStyles(align: PosAlign.center,));
-  //     //   // kotBytes+=generator.emptyLines(2);
-  //     //
-  //     //   for (Map<String, dynamic> item in items) {
-  //     //     if(item['category']==category) {
-  //     //       // addOnPrice = item['addOnPrice'];
-  //     //       // double total = (double.tryParse(item['price'].toString()) +
-  //     //       //     addOnPrice) *
-  //     //       //     double.tryParse(item['qty'].toString());
-  //     //
-  //     //       // double vat = total * 15 / 115;
-  //     //        var newAddOn = item['addOns'];
-  //     //      var  newAddOnArabic = item['addOnArabic'];
-  //     //       // token = item['token'];
-  //     //       // String arabic1 = StringUtils.reverse(arabic);
-  //     //
-  //     //        var addON = newAddOn.isEmpty ? '' : newAddOn.toString();
-  //     //       // double price = (double.tryParse(item['price'].toString()) +
-  //     //       //     addOnPrice) * 100 / 115;
-  //     //
-  //     //
-  //     //        printer.text("${int.tryParse(item['qty']
-  //     //           .toString())} x ${item['pdtname']} $addON");
-  //     //
-  //     //       print("${int.tryParse(item['qty'].toString())} x ${item['pdtname']} $addON");
-  //     //     }
-  //     //   }
-  //     //
-  //     //   if (lastCut == true) {
-  //     //     // final utf8Text="Total Amount( الاجمامي )";
-  //     //     // final cpText =latin1.encode(utf8Text);
-  //     //     printer.feed(2);
-  //     //
-  //     //     printer.cut();
-  //     //
-  //     //     // flutterUsbPrinter.write(cpText);
-  //     //     // flutterUsbPrinter.write(Uint8List.fromList(kotBytes));
-  //     //     // kotBytes = [];//double print
-  //     //     // flutterUsbPrinter.
-  //     //
-  //     //   }
-  //     // }
-  //
-  //
-  //
-  //
-  //
-  //     printer.feed(2);
-  //     printer.cut();
-  //     printer.disconnect(delayMs: 2000);
-  //
-  //     print("end");
-  //   }
-  //   catch(err){
-  //     printer.disconnect(delayMs: 2000);
-  //     print("catch");
-  //     print(err);
-  //   }
-  // }
 
-  // Future<void> _printTicket() async {
-  //   try {
-  //     await printer.connect();
-  //
-  //     final ticket = Ticket();
-  //
-  //     // Add your print text here
-  //     ticket.text('Thank you for your purchase!');
-  //
-  //     await printer.printTicket(ticket);
-  //   } on PlatformException catch (e) {
-  //     print('Error: ${e.message}');
-  //   } finally {
-  //     await printer.disconnect();
-  //   }
-  // }
 
   void checkPortRange(String subnet, int fromPort, int toPort) {
     if (fromPort > toPort) {

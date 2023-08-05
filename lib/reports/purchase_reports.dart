@@ -43,8 +43,6 @@ class _PurchaseReportState extends State<PurchaseReport> {
     getDailyInvoice();
     DateTime today=DateTime.now();
     selectedFromDate =DateTime(today.year,today.month,today.day,0,0,0);
-    // datePicked1 =Timestamp.fromDate(DateTime(today.year,today.month,today.day,0,0,0));
-    // datePicked2 =Timestamp.fromDate(DateTime(today.year,today.month,today.day,23,59,59));
   }
   getInvoiceByNo() async {
     invoices = await FirebaseFirestore.instance
@@ -56,12 +54,46 @@ class _PurchaseReportState extends State<PurchaseReport> {
     setState(() {});
   }
   List invoiceList = [];
+  // getInvoiceByDate() async {
+  //   if (fromDate != null && toDate != null) {
+  //     print(fromDate);
+  //     print(toDate);
+  //     print(selectedFromDate);
+  //     print(selectedOutDate);
+  //
+  //     Timestamp fromDateTimeStamp = Timestamp.fromDate(selectedFromDate);
+  //     Timestamp toDateTimeStamp = Timestamp.fromDate(selectedOutDate);
+  //     invoices = await FirebaseFirestore.instance
+  //         .collection('purchases')
+  //         .doc(currentBranchId)
+  //         .collection('purchases')
+  //         .where('salesDate', isGreaterThanOrEqualTo: fromDateTimeStamp)
+  //         .where('salesDate', isLessThan: toDateTimeStamp)
+  //         .get()
+  //         .then((value) {
+  //       invoices = value;
+  //       for (var item in value.docs) {
+  //         invoiceList.add({
+  //           'staff': PosUserIdToName[item['currentUserId']],
+  //           'amount': item['amount'],
+  //           'invoiceNo': item['invoiceNo'],
+  //           'description': item['description'],
+  //           'voucherNo': item['voucherNo'],
+  //         });
+  //         setState(() {});
+  //       }
+  //     });
+  //   }
+  // }
   getInvoiceByDate() async {
     if (fromDate != null && toDate != null) {
+      print(fromDate);
+      print(toDate);
+      print(selectedFromDate);
+      print(selectedOutDate);
       Timestamp fromDateTimeStamp = Timestamp.fromDate(selectedFromDate);
-
       Timestamp toDateTimeStamp = Timestamp.fromDate(selectedOutDate);
-      invoices = await FirebaseFirestore.instance
+      FirebaseFirestore.instance
           .collection('purchases')
           .doc(currentBranchId)
           .collection('purchases')
@@ -83,7 +115,6 @@ class _PurchaseReportState extends State<PurchaseReport> {
       });
     }
   }
-
   getDailyInvoice() async {
     var now = DateTime.now();
     var lastMidnight =
@@ -134,8 +165,8 @@ class _PurchaseReportState extends State<PurchaseReport> {
                 try {
                   final invoice = PurchaseReportData(
                     InvoiceList: invoiceList,
-                    From: fromDate,
-                    To: toDate,
+                    From: selectedFromDate,
+                    To: selectedOutDate,
                   );
 
                   final pdfFile = await PurchasePdfPage.generate(invoice);

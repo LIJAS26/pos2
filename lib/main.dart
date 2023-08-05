@@ -4645,7 +4645,7 @@ set(){
                                                 }
                                                 print(DateTime.now());
                                                 if(blue) {
-                                                  await showDialog(
+                                                   showDialog(
                                                       barrierDismissible: false,
                                                       context: context,
                                                       builder:
@@ -4695,8 +4695,13 @@ set(){
                                                 }else{
                                                   print(DateTime.now());
                                                    abc(invoiceNo,double.tryParse(discountController.text),
-                                                    items, token,selectedTable,
-                                                    double.tryParse(deliveryCharge.text)??0,double.tryParse(paidCash.text)??0,double.tryParse(paidBank.text)??0,balance??0);}
+                                                       items, token,selectedTable,
+                                                       double.tryParse(deliveryCharge.text)??0,
+                                                       double.tryParse(paidCash.text)??0,
+                                                       double.tryParse(paidBank.text)??0,balance??0
+                                                      );
+
+                                                }
                                                 print(DateTime.now());
                                                  ingredientsUpdate(items);
                                                 FirebaseFirestore.instance
