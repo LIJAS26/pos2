@@ -50,48 +50,30 @@ class _PurchaseReportState extends State<PurchaseReport> {
         .doc(currentBranchId)
         .collection('purchases')
         .where('invoiceNo', isEqualTo: invoiceController.text)
-        .get();
+        .get().
+    then((value) {
+      invoices = value;
+      invoiceList=[];
+      for (var item in value.docs) {
+        print(123);
+        invoiceList.add({
+          'staff': PosUserIdToName[item['currentUserId']],
+          'amount': item['amount'],
+          'invoiceNo': item['invoiceNo'],
+          'description': item['description'],
+          'voucherNo': item['voucherNo'],
+          'date': item['salesDate'],
+        });
+        setState(() {});
+      }
+    });
     setState(() {});
   }
   List invoiceList = [];
-  // getInvoiceByDate() async {
-  //   if (fromDate != null && toDate != null) {
-  //     print(fromDate);
-  //     print(toDate);
-  //     print(selectedFromDate);
-  //     print(selectedOutDate);
-  //
-  //     Timestamp fromDateTimeStamp = Timestamp.fromDate(selectedFromDate);
-  //     Timestamp toDateTimeStamp = Timestamp.fromDate(selectedOutDate);
-  //     invoices = await FirebaseFirestore.instance
-  //         .collection('purchases')
-  //         .doc(currentBranchId)
-  //         .collection('purchases')
-  //         .where('salesDate', isGreaterThanOrEqualTo: fromDateTimeStamp)
-  //         .where('salesDate', isLessThan: toDateTimeStamp)
-  //         .get()
-  //         .then((value) {
-  //       invoices = value;
-  //       for (var item in value.docs) {
-  //         invoiceList.add({
-  //           'staff': PosUserIdToName[item['currentUserId']],
-  //           'amount': item['amount'],
-  //           'invoiceNo': item['invoiceNo'],
-  //           'description': item['description'],
-  //           'voucherNo': item['voucherNo'],
-  //         });
-  //         setState(() {});
-  //       }
-  //     });
-  //   }
-  // }
   getInvoiceByDate() async {
     if (fromDate != null && toDate != null) {
-      print(fromDate);
-      print(toDate);
-      print(selectedFromDate);
-      print(selectedOutDate);
       Timestamp fromDateTimeStamp = Timestamp.fromDate(selectedFromDate);
+
       Timestamp toDateTimeStamp = Timestamp.fromDate(selectedOutDate);
       FirebaseFirestore.instance
           .collection('purchases')
@@ -102,6 +84,7 @@ class _PurchaseReportState extends State<PurchaseReport> {
           .get()
           .then((value) {
         invoices = value;
+        invoiceList=[];
         for (var item in value.docs) {
           invoiceList.add({
             'staff': PosUserIdToName[item['currentUserId']],
@@ -109,12 +92,17 @@ class _PurchaseReportState extends State<PurchaseReport> {
             'invoiceNo': item['invoiceNo'],
             'description': item['description'],
             'voucherNo': item['voucherNo'],
+            'date': item['salesDate'],
+
           });
-          setState(() {});
+          setState(() {
+            print("$invoiceList -------------------------------------");
+          });
         }
       });
     }
   }
+
   getDailyInvoice() async {
     var now = DateTime.now();
     var lastMidnight =
@@ -128,6 +116,7 @@ class _PurchaseReportState extends State<PurchaseReport> {
         .get()
         .then((value) {
       invoices = value;
+      invoiceList=[];
       for (var item in value.docs) {
         print(123);
         invoiceList.add({
@@ -136,13 +125,14 @@ class _PurchaseReportState extends State<PurchaseReport> {
           'invoiceNo': item['invoiceNo'],
           'description': item['description'],
           'voucherNo': item['voucherNo'],
+          'date': item['salesDate'],
+
         });
         setState(() {});
       }
     });
     setState(() {});
   }
-
 
   @override
   Widget build(BuildContext context) {

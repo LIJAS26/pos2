@@ -104,6 +104,7 @@ class PurchasePdfPage {
                 context: context,
                 headers: [
                   'Voucher No',
+                  'Date',
                   'Invoice No',
                   'Amount',
                   'Description',
@@ -119,6 +120,7 @@ class PurchasePdfPage {
                   print(item.toString()+'                    $index');
                   return [
                     item['voucherNo'],
+                    item['date'].toDate().toString().substring(0,10),
                     item['invoiceNo'],
                     item['amount'],
                     item['description'],
