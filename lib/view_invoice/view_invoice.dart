@@ -49,7 +49,7 @@ class _ViewInvoiceState extends State<ViewInvoice> {
   qr(String vatTotal1, String grantTotal,DateTime salesDate) {
     // seller name
     String sellerName = 'Boofiya Faraula';
-    String vat_registration = '310963595400003';
+    String vat_registration = vatNumber;
     String vatTotal = vatTotal1;
     String invoiceTotal = grantTotal;
     BytesBuilder bytesBuilder = BytesBuilder();

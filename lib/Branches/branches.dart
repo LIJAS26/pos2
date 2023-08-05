@@ -13,6 +13,7 @@ String currentBranchName;
 String currentBranchPhNo;
 String currentBranchArabic;
 String currentBranchAddress;
+String vatNumber;
 int offerValue;
 List offerCategory=[];
 // bool offer;
@@ -49,6 +50,7 @@ class _BranchPageWidgetState extends State<BranchPageWidget> {
         offerCategory=datas[0]['offercategories'];
         offer = datas[0]['offer']??false;
         DelCharge=datas[0]["deliveryCharge"]??0;
+        vatNumber=datas[0]["vatNumber"];
 
 
 
@@ -144,6 +146,7 @@ class _BranchPageWidgetState extends State<BranchPageWidget> {
                   offerCategory=datas[0]['offercategories'];
                   offer = datas[0]['offer']??false;
                   DelCharge=datas[0]["deliveryCharge"]??0;
+                  vatNumber=datas[0]["vatNumber"];
 
 
 
@@ -157,6 +160,7 @@ class _BranchPageWidgetState extends State<BranchPageWidget> {
                     offerCategory=datas[0]['offercategories'];
                     offer = datas[0]['offer']??false;
                     DelCharge=datas[0]["deliveryCharge"];
+                    vatNumber=datas[0]["vatNumber"];
 
 
                   });

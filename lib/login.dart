@@ -51,7 +51,8 @@ class _LoginState extends State<Login> {
     if (mounted) {
       setState(() {
         devices = results;
-      });
+      }
+      );
     }
   }
   _connect(int vendorId, int productId) async {

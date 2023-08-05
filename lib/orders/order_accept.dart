@@ -36,7 +36,7 @@ class _AcceptedOrdersWidgetState extends State<AcceptedOrdersWidget> {
   qr(String vatTotal1, String grantTotal) {
     // seller name
     String sellerName = 'Boofiya Faraula';
-    String vat_registration = '310963595400003';
+    String vat_registration = vatNumber;
     String vatTotal = vatTotal1;
     String invoiceTotal = grantTotal;
     BytesBuilder bytesBuilder = BytesBuilder();
@@ -120,7 +120,7 @@ class _AcceptedOrdersWidgetState extends State<AcceptedOrdersWidget> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children:  [
-                Text(' 310963595400003 :'+ 'Vat( رقم ضريبة )',style: TextStyle(fontFamily:'GE Dinar One Medium',color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
+                Text(' $vatNumber :'+ 'Vat( رقم ضريبة )',style: TextStyle(fontFamily:'GE Dinar One Medium',color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
               ],
             ),
             Row(

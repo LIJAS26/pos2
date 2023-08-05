@@ -73,7 +73,7 @@ class _mytestState extends State<return_salesPrint> {
   qr(String vatTotal1, String grantTotal) {
     // seller name
     String sellerName = 'Boofiya Faraula';
-    String vat_registration = '310963595400003';
+    String vat_registration = vatNumber;
     String vatTotal = vatTotal1;
     String invoiceTotal = grantTotal;
     BytesBuilder bytesBuilder = BytesBuilder();
@@ -401,8 +401,8 @@ class _mytestState extends State<return_salesPrint> {
             mainAxisAlignment: MainAxisAlignment.center,
             children:  [Column(
               children: [
-                Text('رقم ضريبة  :  ${arabicNumber.convert(310963595400003)}',style: TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
-                Text('Vat  : 310963595400003',style: TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
+                Text('رقم ضريبة  :  ${arabicNumber.convert(vatNumber)}',style: TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
+                Text('Vat  : $vatNumber',style: TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
 
               ],
             )],
