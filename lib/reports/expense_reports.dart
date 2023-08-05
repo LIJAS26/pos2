@@ -251,8 +251,8 @@ class _ExpenseReportState extends State<ExpenseReport> {
                 try {
                   final invoice = ExpenseReportData(
                     InvoiceList: invoiceList,
-                    From: fromDate,
-                    To: toDate,
+                    From: selectedFromDate,
+                    To: selectedOutDate,
                   );
 
                   final pdfFile = await ExpensePdfPage.generate(invoice);

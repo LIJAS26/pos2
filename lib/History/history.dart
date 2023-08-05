@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:awafi_pos/Branches/branches.dart';
-import 'package:basic_utils/basic_utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esc_pos_printer/esc_pos_printer.dart';
 import 'package:esc_pos_utils/esc_pos_utils.dart';
@@ -12,14 +11,11 @@ import 'package:flutter_usb_printer/flutter_usb_printer.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
-import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as im;
-
 import '../main.dart';
 import '../product_card.dart';
-import '../salesPrint/new_sales_print.dart';
 import 'history_print.dart';
 
 class history_View_Widget extends StatefulWidget {
@@ -137,24 +133,51 @@ class _history_View_WidgetState extends State<history_View_Widget> {
     final im.Image image = im.decodeImage(imgBytes);
     bytes += generator.image(image);
 
-    // bytes+=generator.text('Sharayya No.5 Makkah near Sulthan Sweets',styles: PosStyles(align: PosAlign.center,),);
-
-
-
-
-    //
     final im.Image image1 = im.decodeImage(capturedImage1);
     bytes += generator.image(image1);
-    bytes += generator.row([
-      PosColumn(text:"Date :",styles: PosStyles(bold: true,align: PosAlign.left,height: PosTextSize.size1,width: PosTextSize.size1),width: 6),
-      PosColumn(text:"${DateTime.now().toString().substring(0, 19)} ",styles: PosStyles(bold: true,align: PosAlign.right,height: PosTextSize.size1,width: PosTextSize.size1),width: 6)
-    ]);
-    bytes += generator.row(
-        [
-          PosColumn(text: "Invoice No :",styles: const PosStyles(bold: true,align: PosAlign.left,height: PosTextSize.size1,width: PosTextSize.size1),width: 6),
-          PosColumn(text: "$invNo",styles: const PosStyles(bold: true,align: PosAlign.right,height: PosTextSize.size1,width: PosTextSize.size1),width: 6)
+    // bytes += generator.row([
+    //   PosColumn(text:"Date :",styles: PosStyles(bold: true,align: PosAlign.left,height: PosTextSize.size1,width: PosTextSize.size1),width: 4),
+    //   PosColumn(text:"${DateTime.now().toString().substring(0, 19)} ",styles: PosStyles(bold: true,align: PosAlign.right,height: PosTextSize.size1,width: PosTextSize.size1),width: 8)
+    // ]);
+    // bytes += generator.row(
+    //     [
+    //       PosColumn(text: "Invoice No:",styles: const PosStyles(bold: true,align: PosAlign.left,height: PosTextSize.size1,width: PosTextSize.size1),width: 4),
+    //       PosColumn(text: "$invNo ",styles: const PosStyles(bold: true,align: PosAlign.right,height: PosTextSize.size1,width: PosTextSize.size1),width: 4)
+    //     ]);
+    capturedImage10= await    screenshotController
+        .captureFromWidget(Container(
+      color: Colors.white,
+      width: printWidth*3,
+      child: ListView(
 
-        ]);
+          shrinkWrap: true,
+          // physics: NeverScrollableScrollPhysics(),
+          children:[
+
+
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Date :', style: TextStyle(color: Colors.black, fontSize: fontSize + 2, fontWeight: FontWeight.w600),),
+                Text('${DateTime.now().toString().substring(0, 19)}', style: TextStyle(color: Colors.black, fontSize: fontSize, fontWeight: FontWeight.w600),),
+
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children:  [
+                Text('Invoice No:',style: TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
+                Text('$invNo',style: TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
+              ],),
+
+
+          ]
+      ),
+    )
+    );
+    final im.Image image10 = im.decodeImage(capturedImage10);
+    bytes += generator.image(image10);
 
     bytes +=generator.text("-------------------------------------------",styles: PosStyles(bold: true,align: PosAlign.center,height: PosTextSize.size2,));
 

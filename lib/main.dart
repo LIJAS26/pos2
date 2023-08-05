@@ -514,7 +514,9 @@ setItemWidgets(List items) async {
                   // ),
 
                 ]
-            )));
+            )
+        )
+    );
     if (itemWidgets1.length == itemCount) {
       itemImage = await screenshotController
           .captureFromWidget(Container(
@@ -976,16 +978,49 @@ try {
   final im.Image image1 = im.decodeImage(capturedImage1);
   print("here");
   bytes += generator.image(image1,);
-  bytes += generator.row([
-    PosColumn(text:"Date :",styles: PosStyles(bold: true,align: PosAlign.left,height: PosTextSize.size1,width: PosTextSize.size1),width: 6),
-    PosColumn(text:"${DateTime.now().toString().substring(0, 19)} ",styles: PosStyles(bold: true,align: PosAlign.right,height: PosTextSize.size1,width: PosTextSize.size1),width: 6)
-  ]);
-  bytes += generator.row(
-      [
-    PosColumn(text: "Invoice No :",styles: const PosStyles(bold: true,align: PosAlign.left,height: PosTextSize.size1,width: PosTextSize.size1),width: 6),
-    PosColumn(text: "$invNo",styles: const PosStyles(bold: true,align: PosAlign.right,height: PosTextSize.size1,width: PosTextSize.size1),width: 6)
+  capturedImage10= await    screenshotController
+      .captureFromWidget(Container(
+    color: Colors.white,
+    width: printWidth*3,
+    child: ListView(
 
-      ]);
+        shrinkWrap: true,
+        // physics: NeverScrollableScrollPhysics(),
+        children:[
+
+
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Date :', style: TextStyle(color: Colors.black, fontSize: fontSize + 2, fontWeight: FontWeight.w600),),
+              Text('${DateTime.now().toString().substring(0, 19)}', style: TextStyle(color: Colors.black, fontSize: fontSize, fontWeight: FontWeight.w600),),
+
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Order Type', style: TextStyle(color: Colors.black, fontSize: fontSize + 2, fontWeight: FontWeight.w600),),
+              Text(dropdownvalue, style: TextStyle(color: Colors.black, fontSize: fontSize, fontWeight: FontWeight.w600),),
+
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children:  [
+              Text('Invoice No:',style: TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
+              Text('$invNo',style: TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
+            ],),
+
+
+        ]
+    ),
+  )
+  );
+  final im.Image image10 = im.decodeImage(capturedImage10);
+  bytes += generator.image(image10);
+
 
   bytes +=generator.text("-------------------------------------------",styles: PosStyles(bold: true,align: PosAlign.center,height: PosTextSize.size2,));
 
@@ -1195,91 +1230,6 @@ try {
               child:  Center(child: Text('-------------------------------------------',
                 style: TextStyle(color: Colors.black,fontSize: printWidth*.25),))
           ),
-          // Container( padding: const EdgeInsets.all(1.0),
-          //     decoration: const BoxDecoration(
-          //       color: Colors.white,
-          //     ),
-          //     child:  Center(child: Text('-------------------------------------------',
-          //       style: TextStyle(color: Colors.black,fontSize: printWidth*.25),))),
-          // Container(
-          //   padding: const EdgeInsets.fromLTRB(1, 4, 1, 1),
-          //   decoration: const BoxDecoration(
-          //     color: Colors.white,
-          //   ),
-          //   child:       Column(
-          //     children: [
-          //       Text('  الإجمالي  :  ${arabicNumber.convert(totalAmount.toStringAsFixed(2))}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //       Text(' Total Amount  :  ${totalAmount.toStringAsFixed(2)}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //     ],
-          //   ),),
-          // Container(    padding: const EdgeInsets.all(1.0),
-          //   decoration: const BoxDecoration(
-          //     color: Colors.white,
-          //   ),
-          //   child:     Column(
-          //     children: [
-          //       Text(' رقم ضريبة  :  ${arabicNumber.convert((totalAmount * gst / 100).toStringAsFixed(2))}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //       Text('Vat  :  ${(totalAmount * gst / 100).toStringAsFixed(2)}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //     ],
-          //   ),),
-          // Container(    padding: const EdgeInsets.all(1.0),
-          //   decoration: const BoxDecoration(
-          //     color: Colors.white,
-          //   ),
-          //   child:     Center(
-          //     child:  Column(
-          //       children:   [
-          //         Text('نقدأ  :  ${arabicNumber.convert(pc.toStringAsFixed(2))}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //         Text('Cash  :  $pc',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //         Text('مصرف  :  ${arabicNumber.convert(pb.toStringAsFixed(2))}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //         Text('bank  :  $pb',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //         Text('المتبقي :  ${arabicNumber.convert(bal.toStringAsFixed(2))}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //         Text('Change :  $bal',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          // Container(    padding: const EdgeInsets.all(1.0),
-          //   decoration: const BoxDecoration(
-          //     color: Colors.white,
-          //   ),
-          //   child:      Column(
-          //     children: [
-          //       Text(' رسوم التوصيل  :  ${arabicNumber.convert(deliveryAmount.toStringAsFixed(2))}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //       Text('Delivery Charge  :  ${deliveryAmount.toStringAsFixed(2)}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //     ],
-          //   ),),
-          // Container( padding: const EdgeInsets.all(1.0),
-          //     decoration: const BoxDecoration(
-          //       color: Colors.white,
-          //     ),
-          //     child:  Center(child: Text('.............................................',
-          //       style: TextStyle(color: Colors.black,fontSize: printWidth*.25),))),
-          // Container(
-          //   padding: const EdgeInsets.fromLTRB(1, 4, 1, 1),
-          //   decoration: const BoxDecoration(
-          //     color: Colors.white,
-          //   ),
-          //   child:     Column(
-          //     children: [
-          //       Text(' خصم  :  ${arabicNumber.convert(discount==null?"0.00":discount.toStringAsFixed(2))}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //       Text('Discount  : ${(discount==null?"0.00":discount.toStringAsFixed(2))}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-          //
-          //     ],
-          //   ),),
-          // // ${(discount==null?"0.00":discount.toStringAsFixed(2))}
-          // Container(    padding: const EdgeInsets.all(1.0),
-          //   decoration: const BoxDecoration(
-          //     color: Colors.white,
-          //   ),
-          //   child:   Column(
-          //     children: [
-          //
-          //       Text(' المجموع الإجمالي  :  ${arabicNumber.convert((grantTotal-(double.tryParse(discount.toString())??0)+(deliveryAmount??0)).toStringAsFixed(2))}',style:  TextStyle(color: Colors.black,fontSize: fontSize+8,fontWeight: FontWeight.w600),),
-          //       Text('Grand Total  :  ${(grantTotal-(double.tryParse(discount.toString())??0)+(deliveryAmount??0)).toStringAsFixed(2)}',style:  TextStyle(color: Colors.black,fontSize: fontSize+5,fontWeight: FontWeight.w600),),
-          //     ],
-          //   ),),
         ],
       )
   );
