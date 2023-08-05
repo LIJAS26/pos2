@@ -954,6 +954,8 @@ List previousItems=[];
 try {
   print("abc start");
   print(DateTime.now());
+
+
   final CapabilityProfile profile = await CapabilityProfile.load(name: "TP806L");
   const PaperSize paper1 = PaperSize.mm80;
   var profile1 = await CapabilityProfile.load();
@@ -961,7 +963,6 @@ try {
   print(DateTime.now());
   final generator = Generator(PaperSize.mm80, profile);
   bytes = [];
-
   kotBytes = [];
 
 
@@ -969,15 +970,14 @@ try {
   final im.Image image = im.decodeImage(imgBytes);
   bytes += generator.image(image);
   bytes += generator.feed(2);
-  // bytes+=generator.text('Sharayya No.5 Makkah near Sulthan Sweets',styles: PosStyles(align: PosAlign.center));
-
-
 
   print(DateTime.now());
-  print(capturedImage1);
+
   final im.Image image1 = im.decodeImage(capturedImage1);
   print("here");
+
   bytes += generator.image(image1,);
+
   capturedImage10= await    screenshotController
       .captureFromWidget(Container(
     color: Colors.white,
@@ -1016,31 +1016,20 @@ try {
 
         ]
     ),
-  )
-  );
+  ));
+
   final im.Image image10 = im.decodeImage(capturedImage10);
   bytes += generator.image(image10);
 
 
   bytes +=generator.text("-------------------------------------------",styles: PosStyles(bold: true,align: PosAlign.center,height: PosTextSize.size2,));
-
   bytes +=generator.text("TOKEN NUMBER : $token",styles: PosStyles(bold: true,align: PosAlign.center,height: PosTextSize.size2,width: PosTextSize.size2));
-
   bytes +=generator.text("-------------------------------------------",styles: PosStyles(bold: true,align: PosAlign.center,height: PosTextSize.size2,));
-
-
-
-  //HEAD IMAGE
-  // final Uint8List imgBytes1 = data1.buffer.asUint8List();
-  // final im.Image image11 = im.decodeImage(imgBytes1,);
-  // bytes += generator.image(image11,);
-
 
 
   print(DateTime.now());
 
   final im.Image imagehead = im.decodeImage(capturedhead);
-
   bytes += generator.image(imagehead,);
 
 
@@ -1064,11 +1053,9 @@ try {
   List<Widget> itemWidgets1 = [];
   for (Map<String, dynamic> item in items) {
     addOnPrice = item['addOnPrice'];
-    double total = (double.tryParse(item['price'].toString()) + addOnPrice) *
-        double.tryParse(item['qty'].toString());
+    double total = (double.tryParse(item['price'].toString()) + addOnPrice) * double.tryParse(item['qty'].toString());
     double grossTotal = total * 100 / 115;
-    double vat = (double.tryParse(item['price'].toString()) + addOnPrice) * 15 /
-        115;
+    double vat = (double.tryParse(item['price'].toString()) + addOnPrice) * 15 / 115;
     newAddOn = item['addOns'];
     arabic = item['arabicName'];
     english = item['pdtname'];
@@ -1076,50 +1063,25 @@ try {
 
     grantTotal += total;
 
-    deliveryCharge = item['deliveryCharge'] == null
-        ? 0
-        : double.tryParse(item['deliveryCharge'].toString());
+    deliveryCharge = item['deliveryCharge'] == null ? 0 : double.tryParse(item['deliveryCharge'].toString());
     newAddOn = item['addOns'];
     newAddOnArabic = item['addOnArabic'];
     addOnArabic = newAddOnArabic.isEmpty ? '' : newAddOnArabic.toString();
     addON = newAddOn.isEmpty ? '' : newAddOn.toString();
-    double price = (double.tryParse(item['price'].toString()) + addOnPrice) *
-        100 / 115;
+    double price = (double.tryParse(item['price'].toString()) + addOnPrice) * 100 / 115;
     totalAmount += price * double.tryParse(item['qty'].toString());
-
-
-
-    itemTotal += (totalAmount * ((100 + gst) / 100) -
-        (double.tryParse(discount.toString()) ?? 0))
-        .toStringAsFixed(2);
+    itemTotal += (totalAmount * ((100 + gst) / 100) - (double.tryParse(discount.toString()) ?? 0)).toStringAsFixed(2);
     itemGrossTotal += grossTotal.toStringAsFixed(2);
     itemTax += (totalAmount * gst / 100).toStringAsFixed(2);
   }
+
+
   for(im.Image a in imageList){
     bytes += generator.image(a);
   }
 
 
-  // if (itemWidgets1.length > 0) {
-  //   var capturedIm = await screenshotController
-  //       .captureFromWidget(Container(
-  //     width: printWidth * 3,
-  //
-  //     child: ListView.builder(
-  //         shrinkWrap: true,
-  //         itemCount: itemWidgets1.length,
-  //         itemBuilder: (context, index) {
-  //           return itemWidgets1[index];
-  //         }),
-  //   ));
-  //
-  //   final im.Image image22 = im.decodeImage(capturedIm);
-  //   bytes += generator.image(image22);
-  //   print(DateTime.now());
-  //   itemWidgets1 = [];
-  // }
 
-  List<Widget> itemWidgets2 = [];
   itemWidgets.add(
       Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -1234,15 +1196,15 @@ try {
       )
   );
 
+
   String qrVat = (totalAmount * gst / 100).toStringAsFixed(2);
   String qrTotal = (grantTotal - (double.tryParse(discount.toString()) ?? 0) +
       (deliveryAmount ?? 0)).toStringAsFixed(2);
-  // bluetooth.printQRcode(qr(qrVat, qrTotal), 200, 200, 1);
+
   itemWidgets.add(
       Container(
         color: Colors.white,
         width: printWidth * 2.4,
-
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -1252,9 +1214,9 @@ try {
               size: size / 1.5,
             ),
           ],
-
         ),
-      ));
+      )
+  );
 
 
   bytes += generator.drawer(pin: PosDrawer.pin2);
@@ -1328,20 +1290,11 @@ try {
             bytes += generator.text("${int.tryParse(item['qty']
                 .toString())} x ${item['pdtname']} $addON",styles: const PosStyles(height: PosTextSize.size1,width: PosTextSize.size2));
             bytes += generator.feed(1);
-
-
           }
         }
-
         bytes += generator.feed(2);
         bytes += generator.cut();
-        //double print
-
-
       }
-
-
-
     }
     try {
       bool printSuccess = false;
@@ -1372,15 +1325,10 @@ try {
 
         kotPrinter = printers[printerID]['type'];
         List categoryLists = printerMap[printerID];
-
-
         if (kotPrinter == 1) {
-          // await Future.delayed(Duration(seconds: 10));
-
 
           String ip = printers[printerID]['ip'];
           int port = printers[printerID]['port'];
-
 
           try {
             PosPrintResult res = await printer1.connect(
@@ -1413,12 +1361,10 @@ try {
                   printer1.text("${int.tryParse(item['qty']
                       .toString())} x ${item['pdtname']} $addON",styles: const PosStyles(height: PosTextSize.size1,width: PosTextSize.size2));
                   printer1.feed(1);
-
-
                 }
               }
-              if (lastCut == true) {
 
+              if (lastCut == true) {
                 printer1.feed(4);
                 printer1.cut();
                 printer1.disconnect(delayMs: 10);
@@ -1426,7 +1372,6 @@ try {
             } else {
               print(res.msg);
               print("no printer found");
-              // printer.disconnect(delayMs: 10);
             }
           } catch (e) {
             print("button catch");
@@ -1443,7 +1388,6 @@ try {
       await await flutterUsbPrinter.write(Uint8List.fromList(bytes));
     }
 
-    // bytes = [];
   }
   catch (error) {
     print(error.toString(),);
@@ -1461,7 +1405,6 @@ try {
     try {
       returned = await flutterUsbPrinter.connect(vendorId, productId);
     } on PlatformException {
-      //response = 'Failed to get platform version.';
     }
     if (returned) {
       setState(() {
@@ -4449,86 +4392,7 @@ set(){
                                                           SizedBox(width: 10,),
 
 
-                                                          // Expanded(
-                                                          //   child: InkWell(
-                                                          //     onTap: () {
-                                                          //       setState(() {
-                                                          //         cash = true;
-                                                          //         log(cash.toString());
-                                                          //         log('hhhhhhhhhhhh');
-                                                          //       });
-                                                          //     },
-                                                          //     child: Container(
-                                                          //       color: !cash
-                                                          //           ? Colors.blueGrey
-                                                          //           : Colors.green,
-                                                          //       child: Row(
-                                                          //         mainAxisAlignment:
-                                                          //         MainAxisAlignment
-                                                          //             .center,
-                                                          //         children: [
-                                                          //           Text(
-                                                          //             "Cash",
-                                                          //             style: TextStyle(
-                                                          //                 color: !cash
-                                                          //                     ? Colors.white
-                                                          //                     : Colors
-                                                          //                     .black,
-                                                          //                 fontWeight:
-                                                          //                 FontWeight
-                                                          //                     .bold),
-                                                          //           ),
-                                                          //           Icon(
-                                                          //             Icons.money,
-                                                          //             size: 35,
-                                                          //             color: !cash
-                                                          //                 ? Colors.white
-                                                          //                 : Colors.black,
-                                                          //           ),
-                                                          //         ],
-                                                          //       ),
-                                                          //     ),
-                                                          //   ),
-                                                          // ),
-                                                          // Expanded(
-                                                          //   child: InkWell(
-                                                          //     onTap: () {
-                                                          //       setState(() {
-                                                          //         cash = false;
-                                                          //       });
-                                                          //     },
-                                                          //     child: Container(
-                                                          //       color: cash
-                                                          //           ? Colors.blueGrey
-                                                          //           : Colors.green,
-                                                          //       child: Row(
-                                                          //         mainAxisAlignment:
-                                                          //         MainAxisAlignment
-                                                          //             .center,
-                                                          //         children: [
-                                                          //           Icon(
-                                                          //             Icons.credit_card,
-                                                          //             size: 35,
-                                                          //             color: cash
-                                                          //                 ? Colors.white
-                                                          //                 : Colors.black,
-                                                          //           ),
-                                                          //           Text(
-                                                          //             "Bank",
-                                                          //             style: TextStyle(
-                                                          //                 color: cash
-                                                          //                     ? Colors.white
-                                                          //                     : Colors
-                                                          //                     .black,
-                                                          //                 fontWeight:
-                                                          //                 FontWeight
-                                                          //                     .bold),
-                                                          //           )
-                                                          //         ],
-                                                          //       ),
-                                                          //     ),
-                                                          //   ),
-                                                          // ),
+
                                                         ],
                                                       ),
                                                     ),

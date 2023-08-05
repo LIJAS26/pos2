@@ -812,77 +812,7 @@ class _ViewInvoiceState extends State<ViewInvoice> {
     bytes += generator.image(image2);
     bytes += generator.feed(2);
 
-    // itemWidgets.add(Container(
-    //   color: Colors.white,
-    //   child: Row(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       Column(
-    //         children: [
-    //           SizedBox(height: 8,),
-    //
-    //           Text('${PosUserIdToArabicName[currentUserId]}: المحاسب  ',
-    //             style: TextStyle(color: Colors.black,
-    //               fontSize: fontSize,
-    //               fontWeight: FontWeight.bold,),),
-    //           Text('Cashier : ${PosUserIdToName[currentUserId]}',
-    //             style: TextStyle(color: Colors.black,
-    //                 fontSize: fontSize,
-    //                 fontWeight: FontWeight.bold),),
-    //
-    //           SizedBox(height: 8,),
-    //
-    //           Text('شكرا لك الزيارة مرة أخرى', style: TextStyle(
-    //               color: Colors.black,
-    //               fontSize: fontSize + 3,
-    //               fontWeight: FontWeight.w600),),
-    //           Text('THANK YOU VISIT AGAIN', style: TextStyle(
-    //               color: Colors.black,
-    //               fontSize: fontSize + 3,
-    //               fontWeight: FontWeight.w600),),
-    //
-    //         ],
-    //       ),
-    //     ],
-    //   ),
-    // ));
-    // var capturedImage50 = await screenshotController
-    //     .captureFromWidget(Container(
-    //   width: printWidth * 3,
-    //   height: 180,
-    //   color: Colors.white,
-    //   child: Row(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       Column(
-    //         children: [
-    //           SizedBox(height: 8,),
-    //
-    //           Text('${PosUserIdToArabicName[currentUserId]}: المحاسب  ',
-    //             style: TextStyle(color: Colors.black,
-    //               fontSize: fontSize,
-    //               fontWeight: FontWeight.bold,),),
-    //           Text('Cashier : ${PosUserIdToName[currentUserId]}',
-    //             style: TextStyle(color: Colors.black,
-    //                 fontSize: fontSize,
-    //                 fontWeight: FontWeight.bold),),
-    //
-    //           SizedBox(height: 8,),
-    //
-    //           Text('شكرًا لزيارتك ونتشوق لرؤيتك مرة أخرى', style: TextStyle(
-    //               color: Colors.black,
-    //               fontSize: fontSize + 3,
-    //               fontWeight: FontWeight.w600),),
-    //           Text('THANK YOU VISIT AGAIN', style: TextStyle(
-    //               color: Colors.black,
-    //               fontSize: fontSize + 3,
-    //               fontWeight: FontWeight.w600),),
-    //
-    //         ],
-    //       ),
-    //     ],
-    //   ),
-    // ));
+
 
     final im.Image image50 = im.decodeImage(footerImage);
     bytes += generator.image(image50);

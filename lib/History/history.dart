@@ -697,23 +697,7 @@ print("$capturedhead--------------------");
       ),
     ));
 
-    itemWidgets.add(Container(
-      color: Colors.white,
-      width: printWidth,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children:  [
-          SizedBox(height: 8,),
-          Text('${PosUserIdToArabicName[currentUserId]}: المحاسب  ',style: TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.bold, ),),
-          Text('Cashier : ${PosUserIdToName[currentUserId]}',style: TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.bold),),
 
-          SizedBox(height: 8,),
-          Text('شكرًا لزيارتك ونتشوق لرؤيتك مرة أخرى',style: TextStyle(color: Colors.black,fontSize:fontSize+3,fontWeight: FontWeight.w600),),
-          Text('THANK YOU VISIT AGAIN',style: TextStyle(color: Colors.black,fontSize:fontSize+3,fontWeight: FontWeight.w600),),
-        ],
-      ),
-    )
-    );
     // await  bluetooth.printImageBytes(capturedImage5);
 
 
@@ -731,6 +715,8 @@ print("$capturedhead--------------------");
     ));
     final im.Image image2 = im.decodeImage(capturedImage2);
     bytes += generator.image(image2);
+    final im.Image footer = im.decodeImage(footerImage);
+    bytes += generator.image(footer,);
 
 
     // try {
