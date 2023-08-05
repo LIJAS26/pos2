@@ -50,7 +50,7 @@ class _history_View_WidgetState extends State<history_View_Widget> {
   qr(String vatTotal1, String grantTotal, DateTime saleDate) {
     // seller name
     String sellerName = 'Boofiya Faraula';
-    String vat_registration = '310963595400003';
+    String vat_registration = vatNumber;
     String vatTotal = vatTotal1;
     String invoiceTotal = grantTotal;
     BytesBuilder bytesBuilder = BytesBuilder();

@@ -78,7 +78,7 @@ class _history_printState extends State<history_print> {
     print(widget.salesDate);
     // seller name
     String sellerName = 'Boofiya Faraula';
-    String vat_registration = '310963595400003';
+    String vat_registration = vatNumber;
     String vatTotal = vatTotal1;
     String invoiceTotal = grantTotal;
     BytesBuilder bytesBuilder = BytesBuilder();
@@ -453,8 +453,8 @@ class _history_printState extends State<history_print> {
             children:  [
               Column(
                 children: [
-                  Text('رقم ضريبة  :  ${arabicNumber.convert(310963595400003 )}',style: TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
-                  Text(' Vat  :  310963595400003 ',style: TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
+                  Text('رقم ضريبة  :  ${arabicNumber.convert(vatNumber )}',style: TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
+                  Text(' Vat  :  $vatNumber ',style: TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
 
                 ],
               )
@@ -1201,7 +1201,7 @@ class _history_printState extends State<history_print> {
   //         child: Row(
   //           mainAxisAlignment: MainAxisAlignment.center,
   //           children:  [
-  //             Text(' رقمالظريبة : 310963595400003',style: TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
+  //             Text(' رقمالظريبة : $vatNumber',style: TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
   //           ],
   //         ),
   //       ));

@@ -9,6 +9,7 @@ import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 import 'package:universal_html/html.dart' as html;
 
+import '../../Branches/branches.dart';
 import '../../modals/Print/pdf_api.dart';
 import 'dailyReport_model.dart';
 import 'package:intl/intl.dart';
@@ -69,7 +70,7 @@ print(invoice.From);
                             pw.Row(
                                 children: [
                                   pw.Container(width: 70,child: pw.Text('Vat Number',style: pw.TextStyle(fontSize: 11,fontWeight: FontWeight.bold)),),
-                                  pw.Container(width: 170,child: pw.Text(': 310963595400003',style: pw.TextStyle(fontSize: 11,fontWeight: FontWeight.bold)),),
+                                  pw.Container(width: 170,child: pw.Text(': $vatNumber',style: pw.TextStyle(fontSize: 11,fontWeight: FontWeight.bold)),),
                                 ]
                             ),
                             pw.SizedBox(height: 5),

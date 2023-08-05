@@ -66,7 +66,7 @@ class PurchasePdfPage {
                         pw.Row(
                             children: [
                               pw.Container(width: 70,child: pw.Text('Vat Number',style: pw.TextStyle(fontSize: 11,fontWeight: FontWeight.bold)),),
-                              pw.Container(width: 170,child: pw.Text(' : 310963595400003 ',style: pw.TextStyle(fontSize: 11,fontWeight: FontWeight.bold)),),
+                              pw.Container(width: 170,child: pw.Text(': $vatNumber ',style: pw.TextStyle(fontSize: 11,fontWeight: FontWeight.bold)),),
                             ]
                         ),
                         pw.SizedBox(height: 5),
