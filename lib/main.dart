@@ -1304,15 +1304,7 @@ try {
 
         i++;
         if (!printSuccess) {
-          final snackBar = SnackBar(
-            content: const Text('print not success'),
-            action: SnackBarAction(
-              label: 'Undo',
-              onPressed: () {
-                // Some code to undo the change.
-              },
-            ),
-          );
+
           await _getDevicelist();
           await Future.delayed(Duration(milliseconds: 200));
         }
@@ -1387,13 +1379,11 @@ try {
       print(ex.toString());
       await await flutterUsbPrinter.write(Uint8List.fromList(bytes));
     }
-
   }
   catch (error) {
     print(error.toString(),);
   }
   print("end");
-
 }catch(e){
   print("error occuredddddddddddddddddd");
   print(e.toString());
@@ -4321,7 +4311,6 @@ set(){
                                                                       },
                                                                       onTap: () {
                                                                         setItemWidgets(items);
-
                                                                         double grandTotal=(totalAmount - (double.tryParse(discount) ?? 0)+(double.tryParse(delivery) ??0));
                                                                         // print(grandTotal);
 
