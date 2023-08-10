@@ -33,11 +33,11 @@ class _LoginState extends State<Login> {
     // _getDevicelist();
     // testPrint();
     super.initState();
-    // userName = TextEditingController();
-    // passWord = TextEditingController();
-    //
-    userName = TextEditingController(text: 'faraula@gmail.com');
-    passWord = TextEditingController(text: "123456");
+    userName = TextEditingController();
+    passWord = TextEditingController();
+
+    // userName = TextEditingController(text: 'faraula@gmail.com');
+    // passWord = TextEditingController(text: "123456");
     passwordVisibility = false;
 
   }
@@ -420,7 +420,7 @@ class _LoginState extends State<Login> {
                                                 )
                                             ),),
                                         ),
-                                        Text('version :0.0.5',style: TextStyle(fontSize: 12,color: Colors.grey),),
+                                        Text('version :0.0.6',style: TextStyle(fontSize: 12,color: Colors.grey),),
                                       ],
                                     ),
                                   ),

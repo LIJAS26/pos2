@@ -1,3 +1,4 @@
+import 'package:awafi_pos/main.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -193,7 +194,7 @@ print(widget.To);
       appBar: AppBar(
         title: Text("Product Report"),
         centerTitle: true,
-        backgroundColor: Color(0xffff5722),
+        backgroundColor: primaryColor,
         actions: [
            Padding(
              padding: const EdgeInsets.only(right: 15),

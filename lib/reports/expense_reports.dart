@@ -83,6 +83,7 @@ class _ExpenseReportState extends State<ExpenseReport> {
             'invoiceNo': item['invoiceNo'],
             'description': item['description'],
             'voucherNo': item['voucherNo'],
+            'salesDate':item['salesDate']
           });
           setState(() {});
         }
