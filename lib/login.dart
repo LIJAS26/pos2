@@ -420,7 +420,7 @@ class _LoginState extends State<Login> {
                                                 )
                                             ),),
                                         ),
-                                        Text('version :0.0.6',style: TextStyle(fontSize: 12,color: Colors.grey),),
+                                        Text('version :0.0.7',style: TextStyle(fontSize: 12,color: Colors.grey),),
                                       ],
                                     ),
                                   ),
