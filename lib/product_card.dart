@@ -81,8 +81,7 @@ class _ProductCardState extends State<ProductCard> {
     // TODO: implement initState
     super.initState();
     offCatLower();
-    print("offCategoryLowercase--------------------------------------");
-    print(offCategoryLowercase);
+
     // product=widget.gridViewProductsRecord;
 if(counter==0){
   qty=counter;

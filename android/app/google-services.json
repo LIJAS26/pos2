@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1019051552110",
-    "project_id": "boofiya-faraula",
-    "storage_bucket": "boofiya-faraula.appspot.com"
+    "project_number": "904952167903",
+    "project_id": "boofiya-faraula-new",
+    "storage_bucket": "boofiya-faraula-new.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1019051552110:android:793ed7257a393ca3dc657f",
+        "mobilesdk_app_id": "1:904952167903:android:75334178479127f1a8586a",
         "android_client_info": {
-          "package_name": "com.firstlogicmetalab.boofiya_faraula_pos"
+          "package_name": "com.firstlogicmetalab.boofiya_faraula_new"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1019051552110-va6j0bjjikas23de4gusaig70ttn45ss.apps.googleusercontent.com",
+          "client_id": "904952167903-pkm20is43eos0nrllsip1e5ucnpgbcuj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCmSEPmM4cB3Zk_5q7B8398jvthG6NGBVg"
+          "current_key": "AIzaSyBhhgjWZFv2DxYSx6TXp3LGgRO9iQ0gfIM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1019051552110-va6j0bjjikas23de4gusaig70ttn45ss.apps.googleusercontent.com",
+              "client_id": "904952167903-pkm20is43eos0nrllsip1e5ucnpgbcuj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

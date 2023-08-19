@@ -1265,6 +1265,8 @@ try {
     for (var printerID in printerMap.keys.toList()) {
 
       kotPrinter = printers[printerID]['type'];
+      print("printerID====================================");
+      print(printerID);
       List categoryLists = printerMap[printerID];
        if (kotPrinter == 0) {
          bytes += generator.feed(4);
