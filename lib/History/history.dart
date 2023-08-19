@@ -656,11 +656,22 @@ print("$capturedhead--------------------");
             color: Colors.white,
           ),
           child:     Center(
-            child:  Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child:
+            // Column(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   children:   [
+            //     Text('Cash  :  ${pc}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
+            //     Text('Bank  :  ${pb}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
+            //     Text('Change :  ${bal}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
+            //
+            //   ],
+            // ),
+            Column(
+
+              crossAxisAlignment: CrossAxisAlignment.start,
               children:   [
-                Text('Cash  :  ${pc}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
-                Text('Bank  :  ${pb}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
+                Text('Cash      :  ${pc}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
+                Text('Bank      :  ${pb}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
                 Text('Change :  ${bal}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
 
               ],
@@ -774,6 +785,7 @@ print("$capturedhead--------------------");
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.primaryColor,
           automaticallyImplyLeading: true,
+
           title: Text(
             'History',
             style: FlutterFlowTheme.bodyText1.override(

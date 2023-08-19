@@ -58,7 +58,6 @@ class _SalesReportState extends State<SalesReport> {
           .where('salesDate', isLessThan: toDateTimeStamp)
           .get();
       setState(() {
-
       });
     }
   }

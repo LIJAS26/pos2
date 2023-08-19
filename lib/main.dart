@@ -1171,14 +1171,12 @@ try {
             ),
             child:     Center(
 
-              child:  Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+              child:   Column(
+
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children:   [
-                  // Text('نقدأ  :  ${arabicNumber.convert(pc.toStringAsFixed(2))}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-                  Text('Cash  :  ${pc}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
-                  // Text('مصرف  :  ${arabicNumber.convert(pb.toStringAsFixed(2))}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-                  Text('Bank  :  ${pb}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
-                  // Text('المتبقي :  ${arabicNumber.convert(bal.toStringAsFixed(2))}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
+                  Text('Cash      :  ${pc}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
+                  Text('Bank      :  ${pb}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
                   Text('Change :  ${bal}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
 
                 ],
@@ -1267,6 +1265,8 @@ try {
     for (var printerID in printerMap.keys.toList()) {
 
       kotPrinter = printers[printerID]['type'];
+      print("printerID====================================");
+      print(printerID);
       List categoryLists = printerMap[printerID];
        if (kotPrinter == 0) {
          bytes += generator.feed(4);
@@ -1470,474 +1470,7 @@ try {
           }
     });
   }
-//   var capturedImage1;
-//   var capturedhead;
-//   var footerImage;
-//   var itemImage;
-//   List<im.Image> imageList=[];
-//   setPrinterImages() async {
-//     while(printWidth==0){
-//       await Future.delayed(Duration(seconds: 1));
-//     }
-//    capturedImage1= await    screenshotController
-//       .captureFromWidget(Container(
-//   color: Colors.white,
-//   width: printWidth*3,
-//   child: ListView(
-//
-//   shrinkWrap: true,
-//   // physics: NeverScrollableScrollPhysics(),
-//   children:[
-//   Row(
-//   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//   children: [
-//   Text(currentBranchArabic,style:  TextStyle(fontFamily:'GE Dinar One Medium',color: Colors.black, fontSize: fontSize+2,fontWeight: FontWeight.w600),),
-//   Text(" : اسم الفرع",style:  TextStyle(fontFamily:'GE Dinar One Medium',color: Colors.black, fontSize: fontSize+2,fontWeight: FontWeight.w600),),
-//   ],
-//   ),
-//   Row(
-//   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//   children: [
-//   Text("Branch Name:",style:  TextStyle(fontFamily:'GE Dinar One Medium',color: Colors.black, fontSize: fontSize+2,fontWeight: FontWeight.w600),),
-//   Text(currentBranchAddress,style:  TextStyle(fontFamily:'GE Dinar One Medium',color: Colors.black, fontSize: fontSize+2,fontWeight: FontWeight.w600),),
-//   ],
-//   ),
-//
-//   Row(
-//   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//   children: [
-//   Text('Contact No: ', style: TextStyle(color: Colors.black, fontSize: fontSize + 2, fontWeight: FontWeight.w600),),
-//   Text('$currentBranchPhNo ', style: TextStyle(color: Colors.black, fontSize: fontSize, fontWeight: FontWeight.w600),),
-//
-//   ],
-//   ),
-//   Row(
-//   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//   children:  [
-//   Text('Vat No:',style: TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
-//   Text('311202993300003',style: TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
-//   ],),
-//
-//
-//   ]
-//   ),
-//   )
-//   );
-//     capturedhead = await screenshotController
-//        .captureFromWidget(Container(
-//      color: Colors.white,
-//      width: printWidth * 3,
-//      height: 85,
-//      padding: const EdgeInsets.only(top: 4),
-//      child: Column(
-//        children: [
-//          Row(
-//            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//            children: [
-//              //pdt
-//              Expanded(
-//                child: Column(
-//                  crossAxisAlignment: CrossAxisAlignment.start,
-//                  children: [
-//                    Text('منتج',
-//                      style: TextStyle(
-//                        fontFamily: 'GE Dinar One Medium',
-//                        fontSize: fontSize,
-//                        fontWeight: FontWeight.w600,
-//                        color: Colors.black,
-//                      ),
-//                    ),
-//                    Text('Product',
-//                      style: TextStyle(
-//                          color: Colors.black,
-//                          fontFamily: 'GE Dinar One Medium',
-//                          fontSize: fontSize,
-//                          fontWeight: FontWeight.w600),
-//                    ),
-//
-//                  ],
-//                ),
-//              ),
-//              Container(
-//                width: 45,
-//                child: Column(
-//                  crossAxisAlignment: CrossAxisAlignment.start,
-//                  children: [
-//                    Text('كمية',
-//                      style: TextStyle(
-//                          fontFamily: 'GE Dinar One Medium',
-//                          color: Colors.black,
-//                          fontSize: fontSize,
-//                          fontWeight: FontWeight.w600),
-//                    ),
-//                    Text('Qty',
-//                      style: TextStyle(
-//                          fontFamily: 'GE Dinar One Medium',
-//                          color: Colors.black,
-//                          fontSize: fontSize,
-//                          fontWeight: FontWeight.w600),
-//                    ),
-//
-//                  ],
-//                ),
-//              ),
-//              Container(
-//                width: 45,
-//                child: Column(
-//                  crossAxisAlignment: CrossAxisAlignment.start,
-//                  children: [
-//                    Text('سعر',
-//                      style: TextStyle(
-//                          fontFamily: 'GE Dinar One Medium',
-//                          color: Colors.black,
-//                          fontSize: fontSize,
-//                          fontWeight: FontWeight.w600),
-//                    ),
-//                    Text('Rate',
-//                      style: TextStyle(
-//                          fontFamily: 'GE Dinar One Medium',
-//                          color: Colors.black,
-//                          fontSize: fontSize,
-//                          fontWeight: FontWeight.w600),
-//                    ),
-//
-//                  ],
-//                ),
-//              ),
-//              Container(
-//                width: 45,
-//                child: Column(
-//                  crossAxisAlignment: CrossAxisAlignment.start,
-//                  children: [
-//                    Text('ضريبة',
-//                      style: TextStyle(
-//                          fontFamily: 'GE Dinar One Medium',
-//                          color: Colors.black,
-//                          fontSize: fontSize,
-//                          fontWeight: FontWeight.w600),
-//                    ),
-//                    Text('vat',
-//                      style: TextStyle(
-//                          fontFamily: 'GE Dinar One Medium',
-//                          color: Colors.black,
-//                          fontSize: fontSize,
-//                          fontWeight: FontWeight.w600),
-//                    ),
-//
-//                  ],
-//                ),
-//              ),
-//              Container(
-//                width: 50,
-//                child: Column(
-//                  crossAxisAlignment: CrossAxisAlignment.start,
-//                  children: [
-//                    Text('المجموع',
-//                      style: TextStyle(
-//                          fontFamily: 'GE Dinar One Medium',
-//                          color: Colors.black,
-//                          fontSize: fontSize,
-//                          fontWeight: FontWeight.w600),
-//                    ),
-//                    Text('Total',
-//                      style: TextStyle(
-//                          fontFamily: 'GE Dinar One Medium',
-//                          color: Colors.black,
-//                          fontSize: fontSize,
-//                          fontWeight: FontWeight.w600),
-//                    ),
-//
-//                  ],
-//                ),
-//              ),
-//
-//            ],
-//          ),
-//          Container(
-//              decoration: const BoxDecoration(
-//                color: Colors.white,
-//              ),
-//              child:  Center(child: Text('-------------------------------------------',
-//                style: TextStyle(color: Colors.black,fontSize: printWidth*.25),))
-//          ),
-//        ],
-//      ),
-//    ));
-//     while(PosUserIdToArabicName[currentUserId]==null){
-//       await Future.delayed(Duration(seconds: 1));
-//     }
-//     print("finished");
-//    footerImage=await screenshotController
-//        .captureFromWidget(Container(
-//      width: printWidth * 3,
-//      height: printWidth * 2,
-//      color: Colors.white,
-//      child: Row(
-//        mainAxisAlignment: MainAxisAlignment.center,
-//        children: [
-//          Column(
-//            children: [
-//              SizedBox(height: 8,),
-//              Text('${PosUserIdToArabicName[currentUserId]}: المحاسب  ',
-//                style: TextStyle(color: Colors.black,
-//                  fontSize: fontSize + 2,
-//                  fontWeight: FontWeight.bold,),),
-//              Text('Cashier : ${PosUserIdToName[currentUserId]}',
-//                style: TextStyle(color: Colors.black,
-//                    fontSize: fontSize,
-//                    fontWeight: FontWeight.bold),),
-//
-//              SizedBox(height: 8,),
-//              Text('شكرًا لزيارتك ونتشوق لرؤيتك مرة أخرى', style: TextStyle(
-//                  fontFamily: 'GE Dinar One Medium',
-//                  color: Colors.black,
-//                  fontSize: fontSize + 3,
-//                  fontWeight: FontWeight.w600),),
-//              Text('THANK YOU VISIT AGAIN', style: TextStyle(
-//                  fontFamily: 'GE Dinar One Medium',
-//                  color: Colors.black,
-//                  fontSize: fontSize + 3,
-//                  fontWeight: FontWeight.w600),),
-//            ],
-//          ),
-//        ],
-//      ),
-//    ));
-// }
-//   bool working=false;
-//   setItemWidgets(List items) async {
-//
-//     while(working){
-//
-//       await Future.delayed(const Duration(milliseconds: 300));
-//     }
-//     print("starrrrrrrrrrrrrrrrrrrrt");
-//     print(DateTime.now());
-//     working=true;
-//
-//     List itemWidgets1=[];
-//     imageList=[];
-//
-//     for (Map<String, dynamic> item in items) {
-//       double addOnPrice = item['addOnPrice'];
-//       double total = (double.tryParse(item['price'].toString()) + addOnPrice) *
-//           double.tryParse(item['qty'].toString());
-//       double grossTotal = total * 100 / 115;
-//       double vat = (double.tryParse(item['price'].toString()) + addOnPrice) * 15 /
-//           115;
-//       List newAddOn = item['addOns'];
-//       String arabic = item['arabicName'];
-//       String english = item['pdtname'];
-//
-//
-//
-//       newAddOn = item['addOns'];
-//       newAddOnArabic = item['addOnArabic'];
-//       String addOnArabic = newAddOnArabic.isEmpty ? '' : newAddOnArabic.toString();
-//       String addON = newAddOn.isEmpty ? '' : newAddOn.toString();
-//       double price = (double.tryParse(item['price'].toString()) + addOnPrice) *
-//           100 / 115;
-//
-//       itemWidgets1.add(
-//           Container(
-//               width: printWidth * 3,
-//               padding: const EdgeInsets.all(1.0),
-//               decoration: const BoxDecoration(
-//                 color: Colors.white,
-//               ),
-//
-//               child: ListView(
-//                   shrinkWrap: true,
-//                   children: [
-//                     Container(
-//                       width: printWidth*3,
-//                       child: Column(
-//                         children: [
-//                           Row(
-//                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//
-//                             children: [
-//                               Expanded(
-//                                 child: Column(
-//                                   crossAxisAlignment: CrossAxisAlignment.start,
-//                                   children: [
-//                                     Text('$arabic $addOnArabic',
-//                                       // textDirection: TextDirection.rtl,
-//                                       style:  TextStyle(
-//                                         fontFamily: 'GE Dinar One Medium',
-//                                         fontSize: 17,
-//                                         fontWeight: FontWeight.w600,
-//                                         color: Colors.black,
-//                                       ),
-//                                     ),
-//                                     Text('$english $addON',
-//                                       // textDirection: TextDirection.rtl,
-//                                       style:  TextStyle(
-//                                         fontFamily: 'GE Dinar One Medium',
-//                                         fontSize: fontSize,
-//                                         fontWeight: FontWeight.w600,
-//                                         color: Colors.black,
-//                                       ),
-//                                     ),
-//
-//                                   ],
-//                                 ),
-//                               ),
-//
-//
-//                               Container(
-//                                 width: 45,
-//                                 child: Column(
-//                                   crossAxisAlignment: CrossAxisAlignment.start,
-//                                   children: [
-//                                     // Text('${arabicNumber.convert(double.tryParse(item['qty'].toString()).toStringAsFixed(2))}',
-//                                     //   style:  TextStyle(
-//                                     //       fontFamily: 'GE Dinar One Medium',
-//                                     //       color: Colors.black,
-//                                     //       fontSize: fontSize+2,
-//                                     //       fontWeight: FontWeight.w600),
-//                                     // ),
-//                                     Text('${double.tryParse(item['qty'].toString())}',
-//                                       style:  TextStyle(
-//                                           fontFamily: 'GE Dinar One Medium',
-//                                           color: Colors.black,
-//                                           fontSize: fontSize,
-//                                           fontWeight: FontWeight.w600),
-//                                     ),
-//
-//                                   ],
-//                                 ),
-//                               ),
-//                               Container(
-//                                 width: 45,
-//                                 child: Column(
-//                                   crossAxisAlignment: CrossAxisAlignment.start,
-//                                   children: [
-//                                     // Text('${arabicNumber.convert(price.toStringAsFixed(2))} ',
-//                                     //   style:  TextStyle(
-//                                     //       fontFamily: 'GE Dinar One Medium',
-//                                     //       color: Colors.black,
-//                                     //       fontSize: fontSize+2,
-//                                     //       fontWeight: FontWeight.w600),
-//                                     // ),
-//                                     Text('${price.toStringAsFixed(2)} ',
-//                                       style:  TextStyle(
-//                                           fontFamily: 'GE Dinar One Medium',
-//                                           color: Colors.black,
-//                                           fontSize: fontSize,
-//                                           fontWeight: FontWeight.w600),
-//                                     ),
-//
-//                                   ],
-//                                 ),
-//                               ),
-//                               Container(
-//                                 width: 45,
-//                                 child: Column(
-//                                   crossAxisAlignment: CrossAxisAlignment.start,
-//                                   children: [
-//                                     // Text('${arabicNumber.convert(vat.toStringAsFixed(2))}',
-//                                     //   style:  TextStyle(
-//                                     //       fontFamily: 'GE Dinar One Medium',
-//                                     //       color: Colors.black,
-//                                     //       fontSize: fontSize+2,
-//                                     //       fontWeight: FontWeight.w600),
-//                                     // ),
-//                                     Text('${vat.toStringAsFixed(2)}',
-//                                       style:  TextStyle(
-//                                           fontFamily: 'GE Dinar One Medium',
-//                                           color: Colors.black,
-//                                           fontSize: fontSize,
-//                                           fontWeight: FontWeight.w600),
-//                                     ),
-//
-//                                   ],
-//                                 ),
-//                               ),
-//                               Container(
-//                                 width: 50,
-//                                 child: Column(
-//                                   crossAxisAlignment: CrossAxisAlignment.start,
-//                                   children: [
-//                                     // Text('${arabicNumber.convert(total.toStringAsFixed(2))}',
-//                                     //   style:  TextStyle(
-//                                     //       fontFamily: 'GE Dinar One Medium',
-//                                     //       color: Colors.black,
-//                                     //       fontSize: fontSize+2,
-//                                     //       fontWeight: FontWeight.w600),
-//                                     // ),
-//                                     Text('${total.toStringAsFixed(2)}',
-//                                       style:  TextStyle(
-//                                           fontFamily: 'GE Dinar One Medium',
-//                                           color: Colors.black,
-//                                           fontSize: fontSize,
-//                                           fontWeight: FontWeight.w600),
-//                                     ),
-//
-//                                   ],
-//                                 ),
-//                               ),
-//
-//
-//                             ],
-//                           ),
-//                           SizedBox(height:10)
-//                         ],
-//                       ),
-//                     ),
-//                     // Text("${item['pdtname']} $addON",
-//                     //   textDirection: TextDirection.ltr,
-//                     //   style: const TextStyle(
-//                     //     fontSize: 14,
-//                     //     color: Colors.black,
-//                     //   ),
-//                     // ),
-//
-//                   ]
-//               )));
-//       if (itemWidgets1.length == itemCount) {
-//         itemImage = await screenshotController
-//             .captureFromWidget(Container(
-//           width: printWidth * 3,
-//
-//           child: ListView.builder(
-//               shrinkWrap: true,
-//               itemCount: itemWidgets1.length,
-//               itemBuilder: (context, index) {
-//                 return itemWidgets1[index];
-//               }),
-//         ));
-//
-//         final im.Image image22 = im.decodeImage(itemImage);
-//         imageList.add(image22);
-//         itemWidgets1 = [];
-//       }
-//
-//
-//
-//     }
-//     if (itemWidgets1.isNotEmpty) {
-//       var capturedIm = await screenshotController
-//           .captureFromWidget(Container(
-//         width: printWidth * 3,
-//
-//         child: ListView.builder(
-//             shrinkWrap: true,
-//             itemCount: itemWidgets1.length,
-//             itemBuilder: (context, index) {
-//               return itemWidgets1[index];
-//             }),
-//       ));
-//
-//       final im.Image image22 = im.decodeImage(capturedIm);
-//       imageList.add(image22);
-//
-//       itemWidgets1 = [];
-//     }
-//     working=false;
-//     print("endddddddddddddddddddddddddddddddddddddddddddd");
-//     print(DateTime.now());
-//   }
+
   @override
   void initState() {
     dropdownvalue="Dine-In";
@@ -2601,7 +2134,11 @@ set(){
                 child: Column(
                   children: [
                     IconButton(
-                        onPressed: () => Scaffold.of(context).openDrawer(),
+                        // onPressed: () => Scaffold.of(context).openDrawer(),
+                        onPressed: () {
+                          Scaffold.of(context).openDrawer();
+                          FocusScope.of(context).unfocus();
+                        },
                         tooltip: MaterialLocalizations.of(context)
                             .openAppDrawerTooltip,
                         icon: const Icon(
@@ -3167,62 +2704,64 @@ set(){
                                       ),
                                       child: Column(
                                         children: [
-                                          Container(
-                                            height: 40,
-                                            color: Colors.grey.shade200,
-                                            child: Row(
-                                              children: const [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Center(
-                                                      child: Text(
-                                                        "NO:",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                            FontWeight.bold),
-                                                      )),
-                                                ),
-                                                Expanded(
-                                                  flex: 6,
-                                                  child: Center(
-                                                      child: Text(
-                                                        "NAME",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                            FontWeight.bold),
-                                                      )),
-                                                ),
-                                                Expanded(
-                                                  flex: 3,
-                                                  child: Center(
-                                                      child: Text(
-                                                        "PRICE",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                            FontWeight.bold),
-                                                      )),
-                                                ),
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Center(
-                                                      child: Text(
-                                                        "QTY",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                            FontWeight.bold),
-                                                      )),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Center(
-                                                      child: Text(
-                                                        "",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                            FontWeight.bold),
-                                                      )),
-                                                )
-                                              ],
+                                          SingleChildScrollView(
+                                            child: Container(
+                                              height: 40,
+                                              color: Colors.grey.shade200,
+                                              child: Row(
+                                                children: const [
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child: Center(
+                                                        child: Text(
+                                                          "NO:",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                              FontWeight.bold),
+                                                        )),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 6,
+                                                    child: Center(
+                                                        child: Text(
+                                                          "NAME",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                              FontWeight.bold),
+                                                        )),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 3,
+                                                    child: Center(
+                                                        child: Text(
+                                                          "PRICE",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                              FontWeight.bold),
+                                                        )),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child: Center(
+                                                        child: Text(
+                                                          "QTY",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                              FontWeight.bold),
+                                                        )),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child: Center(
+                                                        child: Text(
+                                                          "",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                              FontWeight.bold),
+                                                        )),
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           ),
                                           //Add Section
@@ -3294,175 +2833,177 @@ set(){
 
                                                     }
                                                   }
-                                                  return Column(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                      children: [
-                                                        Container(
-                                                          padding:
-                                                          const EdgeInsets
-                                                              .only(
-                                                              top: 10),
-                                                          // child:  Container(),
-                                                          child: keyboard
-                                                              ? Container()
-                                                              : BillWidget(
-                                                            items: snapshot
-                                                                .data
-                                                                .get(
-                                                                'items'),
+                                                  return SingleChildScrollView(
+                                                    child: Column(
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                        children: [
+                                                          Container(
+                                                            padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                top: 10),
+                                                            // child:  Container(),
+                                                            child: keyboard
+                                                                ? Container()
+                                                                : BillWidget(
+                                                              items: snapshot
+                                                                  .data
+                                                                  .get(
+                                                                  'items'),
+                                                            ),
                                                           ),
-                                                        ),
-                                                        Container(
-                                                          padding:
-                                                          const EdgeInsets
-                                                              .fromLTRB(
-                                                              20,
-                                                              10,
-                                                              20,
-                                                              10),
-                                                          color: Colors
-                                                              .blueGrey
-                                                              .shade100,
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                            children: [
-                                                              Column(
-                                                                crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                                children: [
-                                                                  Text(
-                                                                    "Total Amount",
-                                                                    style: TextStyle(
-                                                                        fontWeight: FontWeight
-                                                                            .bold,
-                                                                        fontSize:
-                                                                        15,
-                                                                        color:
-                                                                        Colors.grey.shade700),
-                                                                  ),
-                                                                  Text(
-                                                                    "Discount",
-                                                                    style: TextStyle(
-                                                                        fontWeight: FontWeight
-                                                                            .bold,
-                                                                        fontSize:
-                                                                        15,
-                                                                        color:
-                                                                        Colors.grey.shade700),
-                                                                  ),
-                                                                  Text(
-                                                                    "Vat ",
-                                                                    style: TextStyle(
-                                                                        fontWeight: FontWeight
-                                                                            .bold,
-                                                                        fontSize:
-                                                                        15,
-                                                                        color:
-                                                                        Colors.grey.shade700),
-                                                                  ),
-                                                                  Text(
-                                                                    "Delivery ",
-                                                                    style: TextStyle(
-                                                                        fontWeight: FontWeight
-                                                                            .bold,
-                                                                        fontSize:
-                                                                        15,
-                                                                        color:
-                                                                        Colors.grey.shade700),
-                                                                  ),
-                                                                  const SizedBox(
-                                                                    height:
-                                                                    10,
-                                                                  ),
-                                                                  Text(
-                                                                    "Grand Total",
-                                                                    style: TextStyle(
-                                                                        fontWeight: FontWeight
-                                                                            .bold,
-                                                                        fontSize:
-                                                                        16,
-                                                                        color:
-                                                                        Colors.grey.shade700),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Column(
-                                                                crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                                children: [
-                                                                  Text(
-                                                                    "SR ${(totalAmount*100/(100+gst)).toStringAsFixed(2)}",
-                                                                    style: TextStyle(
-                                                                        fontWeight: FontWeight
-                                                                            .bold,
-                                                                        fontSize:
-                                                                        15,
-                                                                        color:
-                                                                        Colors.grey.shade700),
-                                                                  ),
-                                                                  Text(
-                                                                    double.tryParse(discount) ==
-                                                                        null
-                                                                        ? "0.00"
-                                                                        : "SR ${double.tryParse(discount).toStringAsFixed(2)}",
-                                                                    style: TextStyle(
-                                                                        fontWeight: FontWeight
-                                                                            .bold,
-                                                                        fontSize:
-                                                                        16,
-                                                                        color:
-                                                                        Colors.grey.shade700),
-                                                                  ),
-                                                                  Text(
-                                                                    " SR ${(totalAmount * gst /(100+gst)).toStringAsFixed(2)}",
-                                                                    style: TextStyle(
-                                                                        fontWeight: FontWeight
-                                                                            .bold,
-                                                                        fontSize:
-                                                                        15,
-                                                                        color:
-                                                                        Colors.grey.shade700),
-                                                                  ),
-                                                                  Text(
-                                                                    double.tryParse(delivery) ==
-                                                                        null
-                                                                        ? "0.00"
-                                                                        : "SR ${double.tryParse(delivery).toStringAsFixed(2)}",
-                                                                    style: TextStyle(
-                                                                        fontWeight: FontWeight
-                                                                            .bold,
-                                                                        fontSize:
-                                                                        16,
-                                                                        color:
-                                                                        Colors.grey.shade700),
-                                                                  ),
-                                                                  const SizedBox(
-                                                                    height:
-                                                                    10,
-                                                                  ),
-                                                                  Text(
-                                                                    "SR ${(totalAmount - (double.tryParse(discount) ?? 0)+(double.tryParse(delivery) ??0)).toStringAsFixed(2)}",
-                                                                    style: TextStyle(
+                                                          Container(
+                                                            padding:
+                                                            const EdgeInsets
+                                                                .fromLTRB(
+                                                                20,
+                                                                10,
+                                                                20,
+                                                                10),
+                                                            color: Colors
+                                                                .blueGrey
+                                                                .shade100,
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                              children: [
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      "Total Amount",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                          15,
+                                                                          color:
+                                                                          Colors.grey.shade700),
+                                                                    ),
+                                                                    Text(
+                                                                      "Discount",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                          15,
+                                                                          color:
+                                                                          Colors.grey.shade700),
+                                                                    ),
+                                                                    Text(
+                                                                      "Vat ",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                          15,
+                                                                          color:
+                                                                          Colors.grey.shade700),
+                                                                    ),
+                                                                    Text(
+                                                                      "Delivery ",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                          15,
+                                                                          color:
+                                                                          Colors.grey.shade700),
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      height:
+                                                                      10,
+                                                                    ),
+                                                                    Text(
+                                                                      "Grand Total",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                          16,
+                                                                          color:
+                                                                          Colors.grey.shade700),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      "SR ${(totalAmount*100/(100+gst)).toStringAsFixed(2)}",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                          15,
+                                                                          color:
+                                                                          Colors.grey.shade700),
+                                                                    ),
+                                                                    Text(
+                                                                      double.tryParse(discount) ==
+                                                                          null
+                                                                          ? "0.00"
+                                                                          : "SR ${double.tryParse(discount).toStringAsFixed(2)}",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                          16,
+                                                                          color:
+                                                                          Colors.grey.shade700),
+                                                                    ),
+                                                                    Text(
+                                                                      " SR ${(totalAmount * gst /(100+gst)).toStringAsFixed(2)}",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                          15,
+                                                                          color:
+                                                                          Colors.grey.shade700),
+                                                                    ),
+                                                                    Text(
+                                                                      double.tryParse(delivery) ==
+                                                                          null
+                                                                          ? "0.00"
+                                                                          : "SR ${double.tryParse(delivery).toStringAsFixed(2)}",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                          16,
+                                                                          color:
+                                                                          Colors.grey.shade700),
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      height:
+                                                                      10,
+                                                                    ),
+                                                                    Text(
+                                                                      "SR ${(totalAmount - (double.tryParse(discount) ?? 0)+(double.tryParse(delivery) ??0)).toStringAsFixed(2)}",
+                                                                      style: TextStyle(
 
-                                                                        fontWeight: FontWeight
-                                                                            .bold,
-                                                                        fontSize:
-                                                                        15,
-                                                                        color:
-                                                                        Colors.grey.shade700),
-                                                                  ),
-                                                                ],
-                                                              )
-                                                            ],
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                          15,
+                                                                          color:
+                                                                          Colors.grey.shade700),
+                                                                    ),
+                                                                  ],
+                                                                )
+                                                              ],
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ]);
+                                                        ]),
+                                                  );
                                                 }),
                                           ),
                                         ],

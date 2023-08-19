@@ -510,7 +510,7 @@ class _ViewInvoiceState extends State<ViewInvoice> {
           ),
           child:     Center(
             child:  Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children:   [
                 // Text('نقدأ  :  ${arabicNumber.convert(pc.toStringAsFixed(2))}',style:  TextStyle(color: Colors.black,fontSize: fontSize,fontWeight: FontWeight.w600),),
                 Text('Cash  :  ${pc}',style:  TextStyle(color: Colors.black,fontSize: fontSize+2,fontWeight: FontWeight.w600),),
@@ -521,6 +521,7 @@ class _ViewInvoiceState extends State<ViewInvoice> {
 
               ],
             ),
+
           ),
         ),
         Container(

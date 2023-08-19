@@ -52,7 +52,7 @@ class _BillWidgetState extends State<BillWidget> {
 // }
     return Container(
       // color: Colors.green,
-      height: MediaQuery.of(context).size.height*.4,
+      height: MediaQuery.of(context).size.height*.46,
       padding: const EdgeInsets.only(left: 5,right: 5),
       child:  ListView.builder(
           scrollDirection: Axis.vertical,
