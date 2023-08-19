@@ -1477,6 +1477,7 @@ try {
     setPrinterImages();
     super.initState();
     getPosUser();
+    // updateProduct();
     print("currentBranchId");
     print(currentBranchId);
             // updateSales();
@@ -1650,7 +1651,21 @@ if(mounted)
 
     });
   }
+updateProduct(){
+  FirebaseFirestore.instance
+      .collection('product')
+      .get()
+      .then((value){
+    for(var item in value.docs){
+      item.reference.update({
+       "makingTime":"2"
+      });
+    }
+    setState(() {
 
+    });
+  });
+}
 
   List<DropdownMenuItem<BluetoothDevice>> _getDeviceItems() {
     List<DropdownMenuItem<BluetoothDevice>> items = [];
